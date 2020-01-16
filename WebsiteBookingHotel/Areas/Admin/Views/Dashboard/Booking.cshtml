@@ -1,8 +1,7 @@
 ﻿
 @{
-    ViewData["Title"] = "Danh sách phòng";
+    ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
-
 }
 
 <div class="kt-content  kt-grid__item kt-grid__item--fluid">
@@ -12,7 +11,7 @@
         <div class="kt-subheader   kt-grid__item" id="kt_subheader">
             <div class="kt-subheader__main">
                 <h3 class="kt-subheader__title">
-                    Công ty
+                    Danh sách đặt phòng
                 </h3>
                 <span class="kt-subheader__separator kt-subheader__separator--v"></span>
                 <div class="kt-subheader__group" id="kt_subheader_search">
@@ -79,7 +78,7 @@
                         type: 'remote',
                         source: {
                             read: {
-                                url: '/Admin/Dashboard/GetListRoom',
+                                url: '/Admin/Dashboard/GetListBooking',
                             }
                         }
                     },
@@ -102,56 +101,38 @@
 
                     // columns definition
                     columns: [{
-                        field: "title",
-                        title: "Tên phòng",
+                        field: "email",
+                        title: "email",
                         width: 'auto',
                         autoHide: false
                     }, {
-                        field: "descriptions",
-                        title: "Mô tả",
-                        width: 400,
+                        field: "fromDate",
+                        title: "Từ ngày",
+                        width: 'auto',
                     }, {
-                        field: "addtional",
-                        title: "Dịch vụ đi kèm",
-                        width: 100,
-                        template: function (row) {
-                            var addtional = row.addtional.split(",");
-                            var html = "";
-                            for (var i = 0; i < addtional.length; i++) {
-                                html += '<p><i class="fas fa-check-square"></i> ' + addtional[i] + '</p>';
-                            }
-                            return html;
-                        },
+                        field: "toDate",
+                        title: "Tới ngày",
                     }, {
-                        field: "imageRoom",
-                        title: "Hình ảnh phòng",
-                        template: function (row) {
-                            return '<img src="' + row.imageRoom + '" class="img-fluid" style="max-width: 100px; max-height: 200px" />';
-                        },
+                        field: "adults",
+                        title: "Người lớn",
                     }, {
-                        field: "pirce",
-                        title: "Giá",
-                        width: 100,
+                        field: "children",
+                        title: "Trẻ em",
                     }, {
                         field: "note",
                         title: "Ghi chú",
-                        width: 50,
 
                     }, {
                         field: "id",
-                        width: 50,
+                        width: 110,
                         title: "#",
                         sortable: false,
                         autoHide: false,
                         overflow: 'visible',
                         template: function (row) {
-                            return '\
-                        <a href="/Admin/Dashboard/editRoom?id=' + row.id + '" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Chỉnh sửa" >\
-                            <i class="kt-nav__link-icon flaticon2-contract"></i>\
-                        </a>\
-                        <a class="btn btn-sm btn-clean btn-icon btn-icon-md removeCompanyButton" title="Xóa"" data-id="' + row.id + '" >\
-                            <i class="kt-nav__link-icon flaticon2-trash"></i>\
-                        </a>';
+                            return '<a class="btn btn-sm btn-clean btn-icon btn-icon-md removeCompanyButton" title="Xóa"" data-id="' + row.id + '" >\
+                                <i class="kt-nav__link-icon flaticon2-trash"></i>\
+                            </a>';
                         },
                     }]
                 });
@@ -205,7 +186,7 @@
                         cancelButtonClass: "btn btn-sm btn-bold btn-brand"
                     }).then(function (result) {
                         if (result.value) {
-                            $.post("/Admin/Dashboard/deleteRoom?id=" + id)
+                            $.post("/Admin/Dashboard/deleteBooking?id=" + id)
                                 .done(function (data) {
                                     if (data) {
                                         datatable.reload();

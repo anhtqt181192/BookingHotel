@@ -1,11 +1,11 @@
 ﻿@{
-    ViewData["Title"] = "Trang chủ - Four Seasons Hotel";
+    ViewData["Title"] = "Trang chủ";
 }
 
 <div class="container-fluid p-0 slide-show">
-    <img src="~/img/slideshow_1.jpg" class="img-fluid" style="width: 100%;" alt="Responsive image">
+    <img src="@(ViewBag.Banner != null ? ViewBag.Banner.Link : "/img/slideshow_1.jpg")" class="img-fluid" style="width: 100%;" alt="Responsive image">
     <p class="mx-auto title-welcome">
-        Chào mừng đến với Sunshine Hotel and Resorts
+        @ViewData["Welcome"]
     </p>
 </div>
 <div class="container-fluid p-0 fast-booking-form">
@@ -53,7 +53,7 @@
                 </select>
             </div>
             <div class="col-md-1">
-                <input type="button" class="btn btn-booking text-white" value="Đặt phòng" onclick="bookingRoom()"/>
+                <input type="button" class="btn btn-booking text-white" value="Đặt phòng" onclick="bookingRoom()" />
             </div>
         </div>
     </div>
@@ -93,7 +93,7 @@
                                 @{
                                     bool skip = true;
                                     List<string> Addtionals = new List<string>();
-                                    if(!String.IsNullOrEmpty(item.Addtional))
+                                    if (!String.IsNullOrEmpty(item.Addtional))
                                     {
                                         Addtionals = ((string)item.Addtional).Split(',').ToList();
                                     }
@@ -137,7 +137,7 @@
                         </div>
                         <hr class="h20" />
                         <div class="footer-booking">
-                            <div class="price-booking float-left">900,000 <sup>đ</sup>/<sub>đêm</sub></div>
+                            <div class="price-booking float-left">@item.Pirce.ToString("N0") <sup>đ</sup>/<sub>đêm</sub></div>
                             <div class="float-right">
                                 <input type="button" class="btn btn-info" value="Xem chi tiết" />
                                 <input type="button" class="btn btn-success" value="Đặt phòng" />
@@ -152,19 +152,102 @@
 
 <hr />
 
+<div class="container">
+    <div class="page-index-header pt-5">
+        <h2>
+            TUYỂN TẬP HÌNH ẢNH
+        </h2>
+        <span>
+            " Hãy tìm phòng bạn thích, hãy cảm nhận như nhà của bạn "
+        </span>
+    </div>
+</div>
+
+<hr />
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 page-index-header pb-5">
+            <p class="icon-bigger mx-auto mb-5">
+                <i class="fas fa-file-signature"></i>
+            </p>
+            <h3>
+                Thực đơn
+            </h3>
+            <span>
+                Đồ uống và thực đơn tại Sunshine luôn đa dạng, phù hợp với mọi lứa tuổi, làm hài lòng những vị khách khó tính nhất.
+            </span>
+        </div>
+        <div class="col-md-3 page-index-header pb-5">
+            <p class="icon-bigger mx-auto mb-5">
+                <i class="far fa-credit-card"></i>
+            </p>
+            <h3>
+                Tận hưởng trước - Thanh toán sau
+            </h3>
+            <span>
+                Bạn không cần phải đặt cọc, hãy ở và tận hưởng không khí tại Sunshine rồi thanh toán sau.
+            </span>
+        </div>
+        <div class="col-md-3 page-index-header pb-5">
+            <p class="icon-bigger mx-auto mb-5">
+                <i class="fas fa-door-open"></i>
+            </p>
+            <h3>
+                Nhà hàng luôn phục vụ 24 giờ
+            </h3>
+            <span>
+                Nhà hàng tại Sunshine luôn mở cửa phục vụ quý khách 24 giờ/ngày, với các món ăn Việt - Âu - Á, với các đầu bếp có tay nghề cao.
+            </span>
+        </div>
+        <div class="col-md-3 page-index-header pb-5">
+            <p class="icon-bigger mx-auto mb-5">
+                <i class="fas fa-spa"></i>
+            </p>
+            <h3>
+                Dịch vụ Spa
+            </h3>
+            <span>
+                Bạn mệt mỏi sau 1 ngày tham quan du lịch, bạn có thể sử dụng các dịch vụ massage, thư giãn giúp bạn thoải mái hơn.
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal-booking" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p class="text-center">Đặt phòng thành công.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
 
-<script>
-    function bookingRoom() {
-        var data = {};
-        data.email = $("#fastBookingEmail").val();
-        data.fromDate = $("#fastBookingFromDate").val();
-        data.toDate = $("#fastBookingToDate").val();
-        data.typeRoom = $("#fastBookingTypeRoom > option:selected").text();
-        data.unitCustomer = $("#fastBookingUnit > option:selected").val();
+    <script>
+        function bookingRoom() {
+            var data = {};
+            data.email = $("#fastBookingEmail").val();
+            data.fromDate = $("#fastBookingFromDate").val();
+            data.toDate = $("#fastBookingToDate").val();
+            data.typeRoom = $("#fastBookingTypeRoom > option:selected").text();
+            data.unitCustomer = $("#fastBookingUnit > option:selected").val();
 
-        $.post("/Services/BookingRoom", data, function (d) { console.log(d) });
-    }
-</script>
+            $.post("/Services/BookingRoom", data, function (d) {
+                if (d) {
+                    $("#modal-booking").modal();
+                }
+            });
+        }
+
+        
+
+        $(document).ready(function () {
+            $('[data-toggle="datepicker"]').datepicker();
+        })
+    </script>
 
 }

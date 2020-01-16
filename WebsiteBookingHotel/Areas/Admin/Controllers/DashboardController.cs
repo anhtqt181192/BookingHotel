@@ -19,9 +19,40 @@ namespace WebsiteBookingHotel.Areas.Admin.Controllers
             _context = context;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            ViewBag.ErrorClass = "kt-hidden";
+            return View(_context.WebsiteInfo.Find(1));
+        }
+
+        [HttpPost]
+        public IActionResult Index(WebsiteInfo models)
+        {
+            try
+            {
+                ViewBag.ErrorClass = "kt-hidden";
+                _context.WebsiteInfo.Update(models);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                ViewBag.ErrorClass = "";
+                ModelState.AddModelError("500", e.Message);
+            }
+            return View(models);
+        }
+
+        [HttpPost]
+        public IActionResult GetLogo()
+        {
+            return Json(_context.WebsiteInfo.Find(1).Logo);
+        }
+
+        [HttpPost]
+        public IActionResult GetBanner()
+        {
+            return Json(_context.ImageCollection.Where(c => c.Tag == "banner").FirstOrDefault().Link);
         }
 
         [HttpPost]
@@ -29,6 +60,24 @@ namespace WebsiteBookingHotel.Areas.Admin.Controllers
         {
             return Json(_context.Booking.ToList());
         }
+
+        [HttpPost]
+        public IActionResult DeleteBooking(int Id)
+        {
+            try
+            {
+                Booking r = _context.Booking.Find(Id);
+                _context.Booking.Remove(r);
+                _context.SaveChanges();
+                return Json(true);
+            }
+            catch (Exception e)
+            {
+                ViewBag.ErrorClass = "";
+                return Json(false);
+            }
+        }
+        
 
         public IActionResult ListRoom()
         {
@@ -107,6 +156,10 @@ namespace WebsiteBookingHotel.Areas.Admin.Controllers
                 return Json(false);
             }
         }
-        
+
+        public IActionResult Booking()
+        {
+            return View();
+        }
     }
 }

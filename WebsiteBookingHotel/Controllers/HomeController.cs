@@ -19,7 +19,17 @@ namespace WebsiteBookingHotel.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.Room = _context.Room.ToList();
+            try
+            {
+                ViewData["WebsiteInfo"] = _context.WebsiteInfo.Find(1);
+                ViewData["Welcome"] = _context.WebsiteInfo.Find(1).Note;
+                ViewBag.Banner = _context.ImageCollection.Where(c => c.Tag == "banner").FirstOrDefault();
+                ViewBag.Room = _context.Room.ToList();
+            }
+            catch (Exception e)
+            {
+
+            }
             return View();
         }
 

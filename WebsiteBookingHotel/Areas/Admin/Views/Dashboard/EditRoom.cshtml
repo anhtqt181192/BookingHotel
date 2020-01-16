@@ -34,7 +34,7 @@
                 </div>
 
                 <!--begin::Form-->
-                <form class="kt-form" method="post" action="/Admin/Dashboard/EditRoom">
+                <form id="formMain" class="kt-form" method="post" action="/Admin/Dashboard/EditRoom">
                     @Html.HiddenFor(c => c.Id)
                     <div class="kt-portlet__body">
                         <div class="form-group form-group-last @ViewBag.ErrorClass">
@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="Addtional" class="control-label">Dịch vụ đi kèm</label>
-                                    <input asp-for="Addtional" type="text" class="form-control" placeholder="Dịch vụ đi kèm" />
+                                    <input asp-for="Addtional" type="text" class="form-control" data-role="tagsinput" />
                                     <span asp-validation-for="Addtional" class="text-danger"></span>
                                 </div>
                             </div>
@@ -122,6 +122,11 @@
                 });
             })
         })
+
+        function submitForm() {
+            $("#formMain").submit();
+        }
+
     </script>
 }
 

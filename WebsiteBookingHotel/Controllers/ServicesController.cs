@@ -60,5 +60,50 @@ namespace WebsiteBookingHotel.Controllers
             }
             return Json("/Upload/Img/" + fileName);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadBannerAsync(IFormFile file)
+        {
+            if (file == null)
+            {
+                return Json(false);
+            }
+            var filePath = Path.Combine(_hostingEnvironment.WebRootPath) + "\\Upload\\Img";
+            var fileName = file.FileName;
+            if (!Directory.Exists(filePath))
+                Directory.CreateDirectory(filePath);
+            using (FileStream stream = new FileStream(Path.Combine(filePath, fileName), FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+                ImageCollection image = new ImageCollection();
+                image.Tag = "banner";
+                image.Link = "/Upload/Img/" + fileName;
+                _context.ImageCollection.Add(image);
+                _context.SaveChanges();
+            }
+            return Json("/Upload/Img/" + fileName);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadLogoAsync(IFormFile file)
+        {
+            if (file == null)
+            {
+                return Json(false);
+            }
+            var filePath = Path.Combine(_hostingEnvironment.WebRootPath) + "\\Upload\\Img";
+            var fileName = file.FileName;
+            if (!Directory.Exists(filePath))
+                Directory.CreateDirectory(filePath);
+            using (FileStream stream = new FileStream(Path.Combine(filePath, fileName), FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+                WebsiteInfo websiteInfo = _context.WebsiteInfo.Find(1);
+                websiteInfo.Logo = "/Upload/Img/" + fileName;
+                _context.WebsiteInfo.Update(websiteInfo);
+                _context.SaveChanges();
+            }
+            return Json("/Upload/Img/" + fileName);
+        }
     }
 }

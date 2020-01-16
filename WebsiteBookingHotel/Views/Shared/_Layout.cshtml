@@ -1,9 +1,29 @@
-﻿<!DOCTYPE html>
+﻿@{
+    WebsiteBookingHotel.Data.WebsiteInfo websiteInfo = new WebsiteBookingHotel.Data.WebsiteInfo();
+    if (ViewData["WebsiteInfo"] != null)
+    {
+        websiteInfo = (WebsiteBookingHotel.Data.WebsiteInfo)ViewData["WebsiteInfo"];
+        ViewData["Welcome"] = websiteInfo.Note; 
+    }
+    else
+    {
+        websiteInfo.Logo = "/img/logo.png";
+        websiteInfo.Name = "Four Seasons Hotel";
+        websiteInfo.Slogan = "Haravan lựa chọn Website hàng đầu cho khách hàng";
+        websiteInfo.AddressWebsite = "56 Vân côi, Q. Tân Bình, Tp.HCM";
+        websiteInfo.PhoneNumber = "1900.636.099";
+        websiteInfo.TimeWork = "8h30 - 17h30";
+        websiteInfo.DateWork = "Thứ 2 - Thứ 7";
+        websiteInfo.Email = "tuananh181192@gmail.com";
+        ViewData["Welcome"] = "Chào mừng đến với Sunshine Hotel and Resorts";
+    }
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebsiteBookingHotel</title>
+    <title>@ViewData["Title"] - @websiteInfo.Name </title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto:300,400&display=swap" rel="stylesheet">
     <link href="~/lib/fontawesome-free-5.12.0-web/css/all.css" rel="stylesheet" />
     <environment include="Development">
@@ -18,13 +38,14 @@
     </environment>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/css/mobile.css" rel="stylesheet" />
     @RenderSection("Css", required: false)
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white p-0 mb-5">
             <div class="container">
-                <a>Chào mừng đến với Four Seasons Hotel !</a>
+                <a>Chào mừng đến với @websiteInfo.Name  !</a>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                 </div>
@@ -33,7 +54,7 @@
         <div class="logo container">
             <div class="row">
                 <div class="col-12">
-                    <img class="mx-auto d-block" src="~/img/logo.png">
+                    <img class="mx-auto d-block" src="@websiteInfo.Logo" style="max-width: 270px; max-height: 80px;">
                 </div>
             </div>
         </div>
@@ -78,13 +99,13 @@
                         Giới thiệu
                     </h3>
                     <p>
-                        Haravan lựa chọn Website hàng đầu cho khách hàng
+                        @websiteInfo.Slogan
                     </p>
                     <p>
-                        Ngày làm việc : Thứ 2 - Thứ 7
+                        Ngày làm việc : @websiteInfo.DateWork
                     </p>
                     <p>
-                        Thời gian làm việc : 8h30 - 17h30
+                        Thời gian làm việc : @websiteInfo.TimeWork
                     </p>
                 </div>
                 <div class="col-md-3">
@@ -113,13 +134,13 @@
                         Thông tin
                     </h3>
                     <p>
-                        Địa chỉ : 56 Vân côi, Q. Tân Bình, Tp.HCM
+                        Địa chỉ : @websiteInfo.AddressWebsite
                     </p>
                     <p>
-                        Số điện thoại : 1900.636.099
+                        Số điện thoại : @websiteInfo.PhoneNumber
                     </p>
                     <p>
-                        Email : hi@haravan.com
+                        Email : @websiteInfo.Email
                     </p>
                     <p class="social">
                         <i class="fab fa-facebook"></i>
@@ -130,10 +151,36 @@
                 </div>
             </div>
         </div>
-        <div class="container sub-footer">
-            &copy; 2020 - WebsiteBookingHotel - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
     </footer>
+    <div class="container-fuild sub-footer">
+        <span class="copy-right">
+            © Tran Quoc Tuan Anh
+        </span>
+        <nav class="navbar bg-faded float-right">
+            <div class="container">
+                <ul class="nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Trang chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Phòng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Giới thiệu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Liên hệ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Thư viện ảnh</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -156,22 +203,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.js"></script>
     <script>
         (function (global, factory) {
-          typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('jquery')) :
-          typeof define === 'function' && define.amd ? define(['jquery'], factory) :
-          (factory(global.jQuery));
+            typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('jquery')) :
+                typeof define === 'function' && define.amd ? define(['jquery'], factory) :
+                    (factory(global.jQuery));
         }(this, (function ($) {
 
-          'use strict';
+            'use strict';
 
-          $.fn.datepicker.languages['vn-VN'] = {
-            format: 'dd/mm/yyyy',
-            days: ['chủ nhật', 'thứ 2', 'thứ 3', 'thứ 4', 'thứ 5', 'thứ 6', 'thứ 7'],
-            daysShort: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
-            daysMin: ['cn', '2', '3', '4', '5', '6', '7'],
-            weekStart: 1,
-            months: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
-            monthsShort: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12']
-          };
+            $.fn.datepicker.languages['vn-VN'] = {
+                format: 'dd/mm/yyyy',
+                days: ['chủ nhật', 'thứ 2', 'thứ 3', 'thứ 4', 'thứ 5', 'thứ 6', 'thứ 7'],
+                daysShort: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
+                daysMin: ['cn', '2', '3', '4', '5', '6', '7'],
+                weekStart: 1,
+                months: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+                monthsShort: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12']
+            };
         })));
     </script>
     <script src="~/js/site.js" asp-append-version="true"></script>

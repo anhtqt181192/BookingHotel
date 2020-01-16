@@ -2,6 +2,10 @@
     resize();
 })
 
+$(window).bind("load", function () {
+    setTimeout(function () { resize();}, 500)
+})
+
 $(window).resize(function () {
     resize();
 })

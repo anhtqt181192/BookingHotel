@@ -35,7 +35,7 @@
                 </div>
 
                 <!--begin::Form-->
-                <form class="kt-form" method="post" action="/Admin/Dashboard/CreateRoom">
+                <form id="formMain" class="kt-form" method="post" action="/Admin/Dashboard/CreateRoom">
                     <div class="kt-portlet__body">
                         <div class="form-group form-group-last @ViewBag.ErrorClass">
                             <div class="alert alert-secondary" role="alert">
@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="Addtional" class="control-label">Dịch vụ đi kèm</label>
-                                    <input asp-for="Addtional" type="text" class="form-control" placeholder="Dịch vụ đi kèm" data-role="tagsinput" />
+                                    <input asp-for="Addtional" type="text" class="form-control" data-role="tagsinput" />
                                     <span asp-validation-for="Addtional" class="text-danger"></span>
                                 </div>
                             </div>
@@ -85,7 +85,7 @@
                     </div>
                     <div class="kt-portlet__foot">
                         <div class="kt-form__actions">
-                            <button type="submit" class="btn btn-primary">Tạo mới</button>
+                            <button type="button" onclick="submitForm();" class="btn btn-primary">Tạo mới</button>
                             <a href="/Administrator/Company" class="btn btn-secondary">Hủy</a>
                         </div>
                     </div>
@@ -100,6 +100,7 @@
 
 @section Scripts {
     <script>
+
         $(document).ready(function () {
             $("#file").change(function (e) {
                 var input = document.getElementById("file");
@@ -122,6 +123,11 @@
                 });
             })
         })
+
+        function submitForm() {
+            $("#formMain").submit();
+        }
+
     </script>
 }
 
