@@ -24,6 +24,12 @@ namespace WebsiteBookingHotel.Areas.Admin.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult GetListBooking()
+        {
+            return Json(_context.Booking.ToList());
+        }
+
         public IActionResult ListRoom()
         {
             return View();
@@ -83,5 +89,24 @@ namespace WebsiteBookingHotel.Areas.Admin.Controllers
                 return View(models);
             }
         }
+
+        [HttpPost]
+        public IActionResult DeleteRoom(int Id)
+        {
+            ViewBag.ErrorClass = "kt-hidden";
+            try
+            {
+                Room r = _context.Room.Find(Id);
+                _context.Room.Remove(r);
+                _context.SaveChanges();
+                return Json(true);
+            }
+            catch (Exception e)
+            {
+                ViewBag.ErrorClass = "";
+                return Json(false);
+            }
+        }
+        
     }
 }

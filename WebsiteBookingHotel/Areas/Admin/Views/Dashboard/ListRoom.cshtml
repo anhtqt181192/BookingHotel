@@ -194,13 +194,13 @@
                         cancelButtonClass: "btn btn-sm btn-bold btn-brand"
                     }).then(function (result) {
                         if (result.value) {
-                            $.post("/Admin/company/delete?idCompany=" + id)
+                            $.post("/Admin/Dashboard/deleteRoom?id=" + id)
                                 .done(function (data) {
                                     if (data) {
                                         datatable.reload();
                                         swal.fire({
                                             title: 'Xóa thành công',
-                                            text: 'Công ty đã được xóa!',
+                                            text: 'Phòng đã được xóa!',
                                             type: 'success',
                                             buttonsStyling: false,
                                             confirmButtonText: "OK",
@@ -211,7 +211,7 @@
                         } else if (result.dismiss === 'cancel') {
                             swal.fire({
                                 title: 'Cancelled',
-                                text: 'Hủy xóa thành công ! :)',
+                                text: 'Hủy xóa! :)',
                                 type: 'error',
                                 buttonsStyling: false,
                                 confirmButtonText: "OK",

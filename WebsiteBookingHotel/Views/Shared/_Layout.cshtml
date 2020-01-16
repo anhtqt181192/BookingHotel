@@ -16,6 +16,7 @@
               crossorigin="anonymous"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     @RenderSection("Css", required: false)
 </head>
@@ -92,7 +93,7 @@
                     </h3>
                     <div class="footer-news">
                         <div class="footer-news-img">
-                            <img src="~/img/new-1.jpg"  class="img-fluid"/>
+                            <img src="~/img/new-1.jpg" class="img-fluid" />
                         </div>
                         <div class="footer-news-content">
                             <a href="#">Mừng Tết Bính Thân - Miễn phí cho 10 Khách hàng đầu tiên</a>
@@ -100,7 +101,7 @@
                     </div>
                     <div class="footer-news">
                         <div class="footer-news-img">
-                            <img src="~/img/new-1.jpg"  class="img-fluid"/>
+                            <img src="~/img/new-1.jpg" class="img-fluid" />
                         </div>
                         <div class="footer-news-content">
                             <a href="#">Mừng Tết Bính Thân - Miễn phí cho 10 Khách hàng đầu tiên</a>
@@ -152,6 +153,27 @@
                 integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
         </script>
     </environment>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.js"></script>
+    <script>
+        (function (global, factory) {
+          typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('jquery')) :
+          typeof define === 'function' && define.amd ? define(['jquery'], factory) :
+          (factory(global.jQuery));
+        }(this, (function ($) {
+
+          'use strict';
+
+          $.fn.datepicker.languages['vn-VN'] = {
+            format: 'dd/mm/yyyy',
+            days: ['chủ nhật', 'thứ 2', 'thứ 3', 'thứ 4', 'thứ 5', 'thứ 6', 'thứ 7'],
+            daysShort: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
+            daysMin: ['cn', '2', '3', '4', '5', '6', '7'],
+            weekStart: 1,
+            months: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+            monthsShort: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12']
+          };
+        })));
+    </script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)
