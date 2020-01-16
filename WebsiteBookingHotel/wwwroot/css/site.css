@@ -1,0 +1,260 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+    font-family: 'Arial', sans-serif, sans-serif;
+    font-size: 13px;
+    color: #727272;
+    background: #f5f5f5;
+}
+
+.nav-menu {
+    margin-top: 25px;
+    border-top: 1px solid #ddd;
+    padding: 0px;
+}
+
+ul.ul-nav-menu > li.nav-item {
+    display: block;
+    float: left;
+}
+
+    ul.ul-nav-menu > li.nav-item > a.nav-link {
+        padding: 25px 15px;
+        text-transform: uppercase;
+        color: #4c4c4c;
+        font-size: 16px;
+        transition: all ease-in-out 0.3s;
+    }
+
+        ul.ul-nav-menu > li.nav-item > a.nav-link.active, ul.ul-nav-menu > li.nav-item > a.nav-link:hover {
+            color: #ffffff;
+            background: #58453f;
+        }
+
+.slide-show {
+    position: relative;
+}
+
+    .slide-show .title-welcome {
+        display: block;
+        position: absolute;
+        background: #fff;
+        padding: 10px 15px;
+        font-size: 20px;
+        left: 20%;
+        margin: 0px;
+        font-family: 'Roboto', sans-serif;
+        letter-spacing: 2px;
+        font-weight: 300;
+        font-size: 30px;
+        color: #727272;
+    }
+
+.fast-booking-form {
+    background: #ece4d0;
+}
+
+    .fast-booking-form input, .fast-booking-form select {
+        border-color: #bdae8a;
+    }
+
+    .fast-booking-form .input-group-text {
+        background: #fff;
+        color: #bdae8a;
+        border-color: #bdae8a;
+    }
+
+footer {
+    padding: 15px;
+    background: #58453f;
+    color: #fff;
+}
+
+    footer h3.footer-header-info {
+        font-weight: 500;
+        color: #ec6841;
+        font-family: 'Roboto', sans-serif;
+        font-size: 15px;
+        text-transform: uppercase;
+    }
+
+.footer-news .footer-news-img {
+    width: 35%;
+    display: block;
+    float: left;
+    padding: 5px;
+    padding: 10px 5px;
+}
+
+.footer-news .footer-news-img > img {
+    border: 1px solid #ccc;
+}
+
+
+.footer-news .footer-news-content {
+    width: 65%;
+    display: block;
+    float: left;
+    padding: 5px;
+}
+
+.footer-news .footer-news-content > a {
+    color: #fff;
+}
+
+footer .social i {
+    font-size: 20px;
+    padding-right: 10px;
+}
+
+.btn-booking {
+    background: #e6b641;
+}
+
+.page-index-header {
+    margin: 25px 0px;
+    text-align: center;
+}
+
+.page-index-header > h2 {
+    font-size: 30px;
+    color: #ec6841;
+    letter-spacing: 0px;
+    margin-top: 0;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+}
+
+    .page-index-header > span {
+        font-style: italic;
+        color: #727272;
+    }
+
+hr {
+    border: none;
+    height: 80px;
+    background: url(/img/html-hr.jpg) center no-repeat;
+}
+
+
+hr.h20 {
+    height: 20px;
+}
+
+.tab-index-booking {
+    display: block;
+    position: relative;
+    padding: 5px
+}
+
+    .tab-index-booking.i1 {
+        box-shadow: 0px 0px 3px #28a745;
+    }
+
+    .tab-index-booking.i2 {
+        box-shadow: 0px 0px 3px #d23d3d;
+    }
+
+    .tab-index-booking .lable-booking-status {
+        display: block;
+        position: absolute;
+        padding: 15px;
+        background: #fff;
+        border-radius: 50%;
+        right: -25px;
+        color: #fff;
+        border: 5px solid #fff;
+        width: 80px;
+        height: 80px;
+        text-align: center;
+        text-transform: uppercase;
+        top: -25px;
+    }
+
+    .tab-index-booking.i1 .lable-booking-status {
+        background: #28a745;
+    }
+
+    .tab-index-booking.i2 .lable-booking-status {
+        background: #d23d3d;
+    }
+
+    .tab-index-booking .lable-booking-status.i3 {
+    }
+
+    .tab-index-booking .img-preview {
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 2px;
+    }
+
+    .tab-index-booking .title-booking {
+        color: #ec6841;
+        font-size: 18px;
+        padding: 15px 0px;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .tab-index-booking .description-booking {
+        padding: 10px;
+        color: #727272;
+        text-align: justify;
+    }
+
+    .tab-index-booking .price-booking {
+        font-size: 20px;
+        color: #e00000;
+        padding: 0px 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        background: #fff;
+    }
+
+    .tab-index-booking .footer-booking {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .tab-index-booking .option-booking i {
+        color: #e6b641;
+    }
