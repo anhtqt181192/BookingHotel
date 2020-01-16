@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mars\\source\\repos\\BookingHotel\\WebsiteBookingHotel\\WebsiteBookingHotel.csproj": {}
+    "C:\\Users\\anh.tran\\source\\repos\\BookingHotel\\WebsiteBookingHotel\\WebsiteBookingHotel.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mars\\source\\repos\\BookingHotel\\WebsiteBookingHotel\\WebsiteBookingHotel.csproj": {
+    "C:\\Users\\anh.tran\\source\\repos\\BookingHotel\\WebsiteBookingHotel\\WebsiteBookingHotel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mars\\source\\repos\\BookingHotel\\WebsiteBookingHotel\\WebsiteBookingHotel.csproj",
+        "projectUniqueName": "C:\\Users\\anh.tran\\source\\repos\\BookingHotel\\WebsiteBookingHotel\\WebsiteBookingHotel.csproj",
         "projectName": "WebsiteBookingHotel",
-        "projectPath": "C:\\Users\\Mars\\source\\repos\\BookingHotel\\WebsiteBookingHotel\\WebsiteBookingHotel.csproj",
-        "packagesPath": "C:\\Users\\Mars\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mars\\source\\repos\\BookingHotel\\WebsiteBookingHotel\\obj\\",
+        "projectPath": "C:\\Users\\anh.tran\\source\\repos\\BookingHotel\\WebsiteBookingHotel\\WebsiteBookingHotel.csproj",
+        "packagesPath": "C:\\Users\\anh.tran\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\anh.tran\\source\\repos\\BookingHotel\\WebsiteBookingHotel\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Mars\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\anh.tran\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -41,6 +41,10 @@
       "frameworks": {
         "netcoreapp2.2": {
           "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.4.0, )"
+            },
             "Microsoft.AspNetCore.App": {
               "suppressParent": "All",
               "target": "Package",
@@ -64,10 +68,16 @@
             }
           },
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

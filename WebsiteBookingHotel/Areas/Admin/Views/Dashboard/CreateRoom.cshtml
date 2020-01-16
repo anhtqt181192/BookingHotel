@@ -1,0 +1,129 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model WebsiteBookingHotel.Models.RoomModels
+
+
+@{
+    ViewData["Title"] = "Tạo phòng";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+@section Css {
+    <style>
+        .alert.alert-secondary .alert-text {
+            color: #F44336;
+        }
+
+        .alert-icon .kt-font-brand {
+            color: #F44336 !important;
+        }
+    </style>
+}
+
+<div class="kt-content  kt-grid__item kt-grid__item--fluid">
+    <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+        <div class="kt-grid__item kt-grid__item--fluid" id="kt_content">
+
+            <div class="kt-portlet">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">
+                            Tạo phòng
+                        </h3>
+                    </div>
+                </div>
+
+                <!--begin::Form-->
+                <form class="kt-form" method="post" action="/Admin/Dashboard/CreateRoom">
+                    <div class="kt-portlet__body">
+                        <div class="form-group form-group-last @ViewBag.ErrorClass">
+                            <div class="alert alert-secondary" role="alert">
+                                <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
+                                <div class="alert-text">
+                                    <div asp-validation-summary="All"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Title">Tiêu đề</label>
+                                    <input asp-for="Title" type="text" class="form-control" placeholder="Tiêu đề">
+                                    <span asp-validation-for="Title" class="form-text text-muted"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Descriptions">Mô tả</label>
+                                    <input asp-for="Descriptions" type="text" class="form-control" placeholder="Mô tả">
+                                    <span asp-validation-for="Descriptions" class="form-text text-muted"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Addtional" class="control-label">Dịch vụ đi kèm</label>
+                                    <input asp-for="Addtional" type="text" class="form-control" placeholder="Dịch vụ đi kèm" />
+                                    <span asp-validation-for="Addtional" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="ImageRoom" class="control-label">Link hình ảnh</label>
+                                    <input type="file" id="file" class="form-control" placeholder="Link hình ảnh" />
+                                    <input asp-for="ImageRoom" id="ImageRoom" class="form-control kt-hidden" placeholder="Link hình ảnh" />
+                                    <span asp-validation-for="ImageRoom" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Pirce" class="control-label">Giá phòng</label>
+                                    <input asp-for="Pirce" class="form-control" placeholder="Giá phòng" />
+                                    <span asp-validation-for="Pirce" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Note" class="control-label">Ghi chú</label>
+                                    <input asp-for="Note" class="form-control" placeholder="Ghi chú" />
+                                    <span asp-validation-for="Note" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__foot">
+                        <div class="kt-form__actions">
+                            <button type="submit" class="btn btn-primary">Tạo mới</button>
+                            <a href="/Administrator/Company" class="btn btn-secondary">Hủy</a>
+                        </div>
+                    </div>
+                </form>
+
+                <!--end::Form-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#file").change(function (e) {
+                var input = document.getElementById("file");
+                var files = input.files;
+                var formData = new FormData();
+
+                for (var i = 0; i != files.length; i++) {
+                    formData.append("file", files[i]);
+                }
+
+                jQuery.ajax({
+                    type: 'POST',
+                    url: "/Services/UploadImgAsync",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        $("#ImageRoom").val(data)
+                    }
+                });
+            })
+        })
+    </script>
+}
+
+
+

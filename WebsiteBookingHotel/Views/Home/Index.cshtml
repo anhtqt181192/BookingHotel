@@ -39,7 +39,7 @@
                 <select class="custom-select mr-sm-2" id="fastBookingTypeRoom">
                     <option selected>Loại phòng</option>
                     <option value="1">Phòng đơn</option>
-                    <option value="1">Phòng đôi</option>
+                    <option value="2">Phòng đôi</option>
                 </select>
             </div>
             <div class="col-md-2">
@@ -53,7 +53,7 @@
                 </select>
             </div>
             <div class="col-md-1">
-                <input type="button" class="btn btn-booking text-white" value="Đặt phòng" />
+                <input type="button" class="btn btn-booking text-white" value="Đặt phòng" onclick="bookingRoom()"/>
             </div>
         </div>
     </div>
@@ -72,59 +72,99 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
-                <div class="tab-index-booking i2">
-                    <div class="lable-booking-status">
-                        còn phòng
-                    </div>
-                    <div class="img-preview">
-                        <img src="~/img/img-preview.jpg" class="img-fluid" />
-                    </div>
-                    <div class="title-booking">
-                        Phòng đôi DBL 001 hiện đại ngắm cảnh biển Sunshine Hotel
-                    </div>
-                    <div class="description-booking">
-                        Phòng hướng biển, với cảnh quan tuyệt đẹp, bạn sẽ tận hưởng đầy đủ kỳ nghỉ với các dịch vụ hoàn hảo. Buổi sáng có thể ngắm bình minh,
-                        buổi chiều có thể ngắm hoàng hôn, ngoài ra khách đặt phòng còn được miễn phí ăn sáng các buổi, miễn phí spa 2 ngày. Tiện ích phòng đầy đủ máy...
-                    </div>
-                    <div class="option-booking">
-                        <div class="row m-0">
-                            <div class="col-md-6">
-                                <p>
-                                    <i class="fas fa-check-square"></i> Có ban công
-                                </p>
-                                <p>
-                                    <i class="fas fa-check-square"></i> Có wifi miễn phí
-                                </p>
-                                <p>
-                                    <i class="fas fa-check-square"></i> Miễn phí giặt ủi
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <p>
-                                    <i class="fas fa-check-square"></i> Giường đôi
-                                </p>
-                                <p>
-                                    <i class="fas fa-check-square"></i> Có máy lạnh
-                                </p>
-                                <p>
-                                    <i class="fas fa-check-square"></i> Hướng biển
-                                </p>
+            @foreach (var item in ViewBag.Room)
+            {
+                <div class="col-md-4">
+                    <div class="tab-index-booking i2">
+                        <div class="lable-booking-status">
+                            @item.Note
+                        </div>
+                        <div class="img-preview">
+                            <img src="@item.ImageRoom" class="img-fluid" />
+                        </div>
+                        <div class="title-booking">
+                            @item.Title
+                        </div>
+                        <div class="description-booking">
+                            @item.Descriptions
+                        </div>
+                        <div class="option-booking">
+                            <div class="row m-0">
+                                @{
+                                    bool skip = true;
+                                    List<string> Addtionals = new List<string>();
+                                    if(!String.IsNullOrEmpty(item.Addtional))
+                                    {
+                                        Addtionals = ((string)item.Addtional).Split(',').ToList();
+                                    }
+                                }
+                                <div class="col-md-6">
+                                    @foreach (string s in Addtionals)
+                                    {
+                                        if (skip)
+                                        {
+                                            skip = false;
+                                            <p>
+                                                <i class="fas fa-check-square"></i> @s
+                                            </p>
+                                        }
+                                        else
+                                        {
+                                            skip = true;
+                                        }
+                                    }
+                                </div>
+                                <div class="col-md-6">
+                                    @{
+                                        skip = false;
+                                    }
+                                    @foreach (string s in Addtionals)
+                                    {
+                                        if (skip)
+                                        {
+                                            skip = false;
+                                            <p>
+                                                <i class="fas fa-check-square"></i> @s
+                                            </p>
+                                        }
+                                        else
+                                        {
+                                            skip = true;
+                                        }
+                                    }
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <hr class="h20"/>
-                    <div class="footer-booking">
-                        <div class="price-booking float-left">900,000 <sup>đ</sup>/<sub>đêm</sub></div>
-                        <div class="float-right">
-                            <input type="button" class="btn btn-info" value="Xem chi tiết" />
-                            <input type="button" class="btn btn-success" value="Đặt phòng" />
+                        <hr class="h20" />
+                        <div class="footer-booking">
+                            <div class="price-booking float-left">900,000 <sup>đ</sup>/<sub>đêm</sub></div>
+                            <div class="float-right">
+                                <input type="button" class="btn btn-info" value="Xem chi tiết" />
+                                <input type="button" class="btn btn-success" value="Đặt phòng" />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
         </div>
     </div>
 </div>
 
 <hr />
+
+@section Scripts {
+
+<script>
+    function bookingRoom() {
+        var data = {};
+        data.email = $("#fastBookingEmail").val();
+        data.fromDate = $("#fastBookingFromDate").val();
+        data.toDate = $("#fastBookingToDate").val();
+        data.typeRoom = $("#fastBookingTypeRoom > option:selected").text();
+        data.unitCustomer = $("#fastBookingUnit > option:selected").val();
+
+        $.post("/Services/BookingRoom", data, function (d) { console.log(d) });
+    }
+</script>
+
+}

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebsiteBookingHotel.Data
@@ -12,5 +9,17 @@ namespace WebsiteBookingHotel.Data
             : base(options)
         {
         }
+
+        public DbSet<BLog> Blog { get; set; }
+
+        public DbSet<Booking> Booking { get; set; }
+
+        public DbSet<ImageCollection> ImageCollection { get; set; }
+
+        public DbSet<Room> Room { get; set; }
+
+        public DbSet<TypeRoom> TypeRoom { get; set; }
+
+        public DbSet<WebsiteInfo> WebsiteInfo { get; set; }
     }
 }

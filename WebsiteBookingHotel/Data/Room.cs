@@ -13,7 +13,7 @@ namespace WebsiteBookingHotel.Data
         public string Descriptions { get; set; }
         public string Addtional { get; set; }
         public string ImageRoom { get; set; }
-        public long Pirce { get; set; }
+        public decimal Pirce { get; set; }
         public string Note { get; set; }
     }
 }
