@@ -227,12 +227,13 @@ hr.h20 {
         border-radius: 2px;
     }
 
-    .tab-index-booking .title-booking {
+    .tab-index-booking a.title-booking {
         color: #ec6841;
         font-size: 18px;
         padding: 15px 0px;
         font-weight: 600;
         text-align: center;
+        display: block;
     }
 
     .tab-index-booking .description-booking {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using WebsiteBookingHotel.Data;
 
@@ -28,7 +29,8 @@ namespace WebsiteBookingHotel.Models
             room.Title= Title;
             room.Descriptions= Descriptions;
             room.Addtional= Addtional;
-            room.ImageRoom= ImageRoom;
+            room.ImageRoom = ImageRoom;
+            room.Alias = Regex.Replace(Title, @"[^A-Za-z0-9_\.~]+", "-");
             room.Pirce= Pirce;
             room.Note = Note;
             return room;

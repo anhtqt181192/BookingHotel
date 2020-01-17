@@ -74,7 +74,7 @@
         <div class="row">
             @foreach (var item in ViewBag.Room)
             {
-                <div class="col-md-4">
+                <div class="col-md-4 mb-5">
                     <div class="tab-index-booking i2">
                         <div class="lable-booking-status">
                             @item.Note
@@ -82,9 +82,9 @@
                         <div class="img-preview">
                             <img src="@item.ImageRoom" class="img-fluid" />
                         </div>
-                        <div class="title-booking">
+                        <a href="/Danh-Sach-Phong/@item.Alias" class="title-booking">
                             @item.Title
-                        </div>
+                        </a>
                         <div class="description-booking">
                             @item.Descriptions
                         </div>

@@ -1,0 +1,251 @@
+﻿@model WebsiteBookingHotel.Data.Room
+@{
+    ViewData["Title"] = "Phòng " + Model.Title;
+}
+
+@section Css {
+    <style>
+        body {
+            background: url(@(ViewBag.Banner != null ? ViewBag.Banner.Link : "/img/slideshow_1.jpg")) no-repeat;
+            background-size: 100% auto;
+
+        }
+
+        header {
+            background: #fff;
+        }
+
+        .page-index-header {
+            margin: 0px;
+            padding: 25px 0px;
+            text-align: center;
+            background: rgba(255,255,255,0.8);
+        }
+
+            .page-index-header > h2 {
+                font-size: 30px;
+                color: #ec6841;
+                letter-spacing: 0px;
+                margin-top: 0;
+                text-transform: uppercase;
+                font-weight: 500;
+                font-family: 'Roboto', sans-serif;
+                text-shadow: 0px 0px 3px #b59472;
+            }
+
+        .background-blur {
+            -webkit-filter: blur(5px);
+            -moz-filter: blur(5px);
+            -o-filter: blur(5px);
+            -ms-filter: blur(5px);
+            filter: blur(5px);
+        }
+
+        h3 {
+            font-weight: 500;
+    line-height: 25px;
+    color: #ec6841;
+    font-family: 'Roboto', sans-serif;
+        }
+
+        .additonal {
+                display: inline-block;
+    width: 100%;
+    position: relative;
+        }
+
+        .additonal > p {
+             background: #f2f2f2;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    margin: 15px;
+    width: 40%;
+    float: left;
+    color: #d23d3d;
+        }
+
+        
+        .additonal > p > i {
+           font-size: 16px;
+    color: #22a6ce;
+    padding-right: 5px;
+        }
+
+    </style>
+
+}
+
+<div class="container-fluid p-0">
+    <div class="background-blur"></div>
+    <div class="mx-auto page-index-header">
+        <h2>
+            @Model.Title
+        </h2>
+    </div>
+</div>
+
+<div class="container-fluid pb-5 bg-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 pt-5">
+                <img src="@Model.ImageRoom" class="img-fluid" />
+                <p class="p-5 border-bottom">
+                    <h3>
+                        @Model.Title
+                    </h3>
+                </p>
+                <div class="additonal">
+                    @{
+                        List<string> wAddtionals = new List<string>();
+                        if (!String.IsNullOrEmpty(Model.Addtional))
+                        {
+                            wAddtionals = ((string)Model.Addtional).Split(',').ToList();
+                            foreach (string s in wAddtionals)
+                            {
+                                <p>
+                                    <i class="fas fa-check-square"></i> @s
+                                </p>
+                            }
+                        }
+                    }
+                </div>
+                <div class="description">
+                    @Model.Descriptions
+                </div>
+            </div>
+            <div class="col-md-4 p-2 pt-5">
+                <div class="border-bottom pb-2 mb-4">
+                    <h3>
+                        Đặt phòng
+                    </h3>
+                </div>
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" id="fastBookingEmail" placeholder="Email" style=" border-right: none;">
+                    <div class="input-group-append">
+                        <div class="input-group-text"><i class="far fa-envelope"></i></div>
+                    </div>
+                </div>
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" id="fastBookingFromDate" placeholder="Ngày nhận phòng" style="border-right: none;" data-toggle="datepicker">
+                    <div class="input-group-append">
+                        <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                    </div>
+                </div>
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" id="fastBookingToDate" placeholder="Ngày trả phòng" style="border-right: none;" data-toggle="datepicker">
+                    <div class="input-group-append">
+                        <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                    </div>
+                </div>
+                <select class="custom-select mb-2" id="fastBookingUnit">
+                    <option selected>Số người</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <input type="button" class="btn btn-booking text-white float-right" value="Đặt phòng" onclick="bookingRoom()" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="container-fluid p-0 bg-white">
+    <div class="container-fluid p-0 bg-white">
+        <div class="container">
+            <div class="page-index-header pt-5">
+                <h2>
+                    PHÒNG PHỔ BIẾN
+                </h2>
+                <span>
+                    " Hãy tìm phòng bạn thích, hãy cảm nhận như nhà của bạn "
+                </span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                @foreach (var item in ViewBag.Room)
+                {
+                    <div class="col-md-4 mb-5">
+                        <div class="tab-index-booking i2">
+                            <div class="lable-booking-status">
+                                @item.Note
+                            </div>
+                            <div class="img-preview">
+                                <img src="@item.ImageRoom" class="img-fluid" />
+                            </div>
+                            <a href="/Danh-Sach-Phong/@item.Alias" class="title-booking">
+                                @item.Title
+                            </a>
+                            <div class="description-booking">
+                                @item.Descriptions
+                            </div>
+                            <div class="option-booking">
+                                <div class="row m-0">
+                                    @{
+                                        bool skip = true;
+                                        List<string> Addtionals = new List<string>();
+                                        if (!String.IsNullOrEmpty(item.Addtional))
+                                        {
+                                            Addtionals = ((string)item.Addtional).Split(',').ToList();
+                                        }
+                                    }
+                                    <div class="col-md-6">
+                                        @foreach (string s in Addtionals)
+                                        {
+                                            if (skip)
+                                            {
+                                                skip = false;
+                                                <p>
+                                                    <i class="fas fa-check-square"></i> @s
+                                                </p>
+                                            }
+                                            else
+                                            {
+                                                skip = true;
+                                            }
+                                        }
+                                    </div>
+                                    <div class="col-md-6">
+                                        @{
+                                            skip = false;
+                                        }
+                                        @foreach (string s in Addtionals)
+                                        {
+                                            if (skip)
+                                            {
+                                                skip = false;
+                                                <p>
+                                                    <i class="fas fa-check-square"></i> @s
+                                                </p>
+                                            }
+                                            else
+                                            {
+                                                skip = true;
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="h20" />
+                            <div class="footer-booking">
+                                <div class="price-booking float-left">@item.Pirce.ToString("N0") <sup>đ</sup>/<sub>đêm</sub></div>
+                                <div class="float-right">
+                                    <input type="button" class="btn btn-info" value="Xem chi tiết" />
+                                    <input type="button" class="btn btn-success" value="Đặt phòng" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

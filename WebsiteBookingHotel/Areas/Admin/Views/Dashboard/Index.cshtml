@@ -194,7 +194,8 @@
                     processData: false,
                     contentType: false,
                     success: function (data) {
-                        $(".container-Logo").html("<img class='img-fluid' style='max-height: 200px;' src=" + data + ">")
+                        $(".container-Logo").html("<img class='img-fluid' style='max-height: 200px;' src=" + data + ">");
+                        $("#Logo").val(data);
                     }
                 });
             })

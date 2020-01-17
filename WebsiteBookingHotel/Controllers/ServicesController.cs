@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -43,6 +44,7 @@ namespace WebsiteBookingHotel.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> UploadImgAsync(IFormFile file)
         {
@@ -61,6 +63,7 @@ namespace WebsiteBookingHotel.Controllers
             return Json("/Upload/Img/" + fileName);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> UploadBannerAsync(IFormFile file)
         {
@@ -75,15 +78,16 @@ namespace WebsiteBookingHotel.Controllers
             using (FileStream stream = new FileStream(Path.Combine(filePath, fileName), FileMode.Create))
             {
                 await file.CopyToAsync(stream);
-                ImageCollection image = new ImageCollection();
+                ImageCollection image = _context.ImageCollection.Where(c => c.Tag == "banner").FirstOrDefault();
                 image.Tag = "banner";
                 image.Link = "/Upload/Img/" + fileName;
-                _context.ImageCollection.Add(image);
+                _context.ImageCollection.Update(image);
                 _context.SaveChanges();
             }
             return Json("/Upload/Img/" + fileName);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> UploadLogoAsync(IFormFile file)
         {

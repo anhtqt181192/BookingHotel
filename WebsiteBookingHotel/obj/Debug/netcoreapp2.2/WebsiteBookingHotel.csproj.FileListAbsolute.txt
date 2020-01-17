@@ -99,3 +99,7 @@ C:\Users\anh.tran\Source\Repos\BookingHotel\WebsiteBookingHotel\obj\Debug\netcor
 C:\Users\anh.tran\Source\Repos\BookingHotel\WebsiteBookingHotel\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\Dashboard\CreateRoom.cshtml.g.cs
 C:\Users\anh.tran\Source\Repos\BookingHotel\WebsiteBookingHotel\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\Dashboard\ListRoom.cshtml.g.cs
 C:\Users\anh.tran\Source\Repos\BookingHotel\WebsiteBookingHotel\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\Dashboard\EditRoom.cshtml.g.cs
+C:\Users\anh.tran\source\repos\BookingHotel\WebsiteBookingHotel\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\Dashboard\Booking.cshtml.g.cs
+C:\Users\anh.tran\source\repos\BookingHotel\WebsiteBookingHotel\obj\Debug\netcoreapp2.2\Razor\Views\Room\Index.cshtml.g.cs
+C:\Users\anh.tran\source\repos\BookingHotel\WebsiteBookingHotel\obj\Debug\netcoreapp2.2\Razor\Views\Room\Room.cshtml.g.cs
+C:\Users\anh.tran\source\repos\BookingHotel\WebsiteBookingHotel\obj\Debug\netcoreapp2.2\Razor\Views\Home\Blog.cshtml.g.cs

@@ -1,0 +1,139 @@
+﻿@model IEnumerable<WebsiteBookingHotel.Data.BLog>
+@{
+    ViewData["Title"] = "Tin tức";
+}
+
+@section Css {
+    <style>
+        body {
+            background: url(@(ViewBag.Banner != null ? ViewBag.Banner.Link : "/img/slideshow_1.jpg")) no-repeat;
+            background-size: 100% auto;
+
+        }
+
+        header {
+            background: #fff;
+        }
+
+        .page-index-header {
+            margin: 0px;
+            padding: 25px 0px;
+            text-align: center;
+            background: rgba(255,255,255,0.8);
+        }
+
+            .page-index-header > h2 {
+                font-size: 30px;
+                color: #ec6841;
+                letter-spacing: 0px;
+                margin-top: 0;
+                text-transform: uppercase;
+                font-weight: 500;
+                font-family: 'Roboto', sans-serif;
+                text-shadow: 0px 0px 3px #b59472;
+            }
+
+        .background-blur {
+            -webkit-filter: blur(5px);
+            -moz-filter: blur(5px);
+            -o-filter: blur(5px);
+            -ms-filter: blur(5px);
+            filter: blur(5px);
+        }
+
+        h3 {
+            font-weight: 500;
+    line-height: 25px;
+    color: #ec6841;
+    font-family: 'Roboto', sans-serif;
+        }
+    </style>
+
+}
+
+<div class="container-fluid p-0">
+    <div class="background-blur"></div>
+    <div class="mx-auto page-index-header">
+        <h2>
+            Tin tức
+        </h2>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="container">
+        <div class="row m-0 p-0">
+            <div class="col-md-8">
+                @foreach (var item in Model)
+                {
+                    <div class="wblog">
+                        <div class="wblog-image">
+
+                        </div>
+                        <div class="wblog-date-header">
+                            Tặng ăn sáng buffer cho các chị em phụ nữ trong ngày 20/10
+                        </div>
+                        <div class="wblog-date-content">
+                            Windmill Hotel được xây dựng dọc bờ biển, dựa theo ý tưởng Hy Lạp cổ đại, nhưng vẫn mang hình ảnh hiên đại,
+                            với nhiều dịch vụ tính năng phù hợp với nhiêu tập khách hàng,
+                            từ khách hàng đơn lẻ tới gia đình, với không gian thoán đãng, giúp bạn tận hưởng và thư giãn trọn vẹn kỳ nghỉ.
+                        </div>
+                        <div class="wblog-date-credit">
+                            <span>
+                                Tác giả : @item.Note
+                            </span>
+                            <span class="float-right">
+                                <i class="far fa-clock"></i> @item.DateCreate.ToString("dd/MM/yyyy")
+                            </span>
+                        </div>
+                        <div class="wblog-date-tag">
+                            @item.Tag
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <div class="col-md-4">
+                <div class="sub-hyperlink mb-5">
+                    <div class="sub-hyperlink-header">
+                        Danh mục
+                    </div>
+                    <div class="sub-hyperlink-content">
+                        <p><i class="fas fa-home"></i>Trang chủ</p>
+                        <p><i class="fas fa-home"></i>Phòng</p>
+                        <p><i class="fas fa-home"></i>Blog</p>
+                        <p><i class="fas fa-home"></i>Giới thiệu</p>
+                        <p><i class="fas fa-home"></i>Liên hệ</p>
+                        <p><i class="fas fa-home"></i>Thư viện ảnh</p>
+                    </div>
+                </div>
+                <div class="sub-hyperlink mb-5">
+                    <div class="sub-hyperlink-header">
+                        Tag
+                    </div>
+                    <div class="sub-hyperlink-content">
+                        <span class="tag warning">Phòng</span>
+                        <span class="tag warning">Khách sạn</span>
+                        <span class="tag warning">Khuyến mãi</span>
+                        <span class="tag warning">Phòng</span>
+                        <span class="tag warning">Phòng</span>
+                        <span class="tag warning">Phòng</span>
+                    </div>
+                </div>
+                <div class="sub-hyperlink mb-5">
+                    <div class="sub-hyperlink-header">
+                        Danh mục
+                    </div>
+                    <div class="sub-hyperlink-content">
+                        <p><i class="fas fa-home"></i>Trang chủ</p>
+                        <p><i class="fas fa-home"></i>Phòng</p>
+                        <p><i class="fas fa-home"></i>Blog</p>
+                        <p><i class="fas fa-home"></i>Giới thiệu</p>
+                        <p><i class="fas fa-home"></i>Liên hệ</p>
+                        <p><i class="fas fa-home"></i>Thư viện ảnh</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
