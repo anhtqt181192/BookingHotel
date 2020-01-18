@@ -1,13 +1,10 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model WebsiteBookingHotel.Models.RoomModels
-
+@model WebsiteBookingHotel.Data.BLog
 
 @{
-    ViewData["Title"] = "Tạo phòng";
+    ViewData["Title"] = "Chỉnh sửa bài viết";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-
 
 @section Css {
     <style>
@@ -29,13 +26,14 @@
                 <div class="kt-portlet__head">
                     <div class="kt-portlet__head-label">
                         <h3 class="kt-portlet__head-title">
-                            Tạo phòng
+                            Tạo bài viết
                         </h3>
                     </div>
                 </div>
 
                 <!--begin::Form-->
-                <form id="formMain" class="kt-form" method="post" action="/Admin/Dashboard/CreateRoom">
+                <form id="formMain" class="kt-form" method="post" action="/Admin/Blog/Edit">
+                    @Html.HiddenFor(c => c.Id)
                     <div class="kt-portlet__body">
                         <div class="form-group form-group-last @ViewBag.ErrorClass">
                             <div class="alert alert-secondary" role="alert">
@@ -43,6 +41,19 @@
                                 <div class="alert-text">
                                     <div asp-validation-summary="All"></div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row mb-5 border-bottom">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Addtional" class="control-label">Hình đại diện bài viết</label>
+                                    <input type="file" id="file" class="form-control" placeholder="Link hình ảnh" />
+                                    <input asp-for="Addtional" id="Addtional" class="form-control kt-hidden" placeholder="Link hình ảnh" />
+                                    <span asp-validation-for="Addtional" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-8 container-Addtional">
+                                <img class='img-fluid' style='max-height: 200px;' src="@Model.Addtional">
                             </div>
                         </div>
                         <div class="row">
@@ -57,28 +68,24 @@
                                     <input asp-for="Descriptions" type="text" class="form-control" placeholder="Mô tả">
                                     <span asp-validation-for="Descriptions" class="form-text text-muted"></span>
                                 </div>
-                                <div class="form-group">
-                                    <label asp-for="Addtional" class="control-label">Dịch vụ đi kèm</label>
-                                    <input asp-for="Addtional" type="text" class="form-control" data-role="tagsinput" />
-                                    <span asp-validation-for="Addtional" class="text-danger"></span>
-                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label asp-for="ImageRoom" class="control-label">Link hình ảnh</label>
-                                    <input type="file" id="file" class="form-control" placeholder="Link hình ảnh" />
-                                    <input asp-for="ImageRoom" id="ImageRoom" class="form-control kt-hidden" placeholder="Link hình ảnh" />
-                                    <span asp-validation-for="ImageRoom" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="Pirce" class="control-label">Giá phòng</label>
-                                    <input asp-for="Pirce" class="form-control" placeholder="Giá phòng" />
-                                    <span asp-validation-for="Pirce" class="text-danger"></span>
+                                    <label asp-for="Tag" class="control-label">Tag</label>
+                                    <input asp-for="Tag" type="text" class="form-control" data-role="tagsinput" />
+                                    <span asp-validation-for="Tag" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="Note" class="control-label">Ghi chú</label>
                                     <input asp-for="Note" class="form-control" placeholder="Ghi chú" />
                                     <span asp-validation-for="Note" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="HTML" class="control-label">Nội dung</label>
+                                    <textarea asp-for="HTML" class="form-control" data-provide="markdown" rows="10"></textarea>
+                                    <span asp-validation-for="HTML" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
@@ -118,7 +125,8 @@
                     processData: false,
                     contentType: false,
                     success: function (data) {
-                        $("#ImageRoom").val(data)
+                        $("#Addtional").val(data);
+                        $(".container-Addtional").html("<img class='img-fluid' style='max-height: 200px;' src=" + data + ">")
                     }
                 });
             })
@@ -130,6 +138,4 @@
 
     </script>
 }
-
-
 

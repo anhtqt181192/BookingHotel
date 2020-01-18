@@ -1,0 +1,93 @@
+﻿
+    <div class="container-fluid p-0 bg-white">
+        <div class="container-fluid p-0 bg-white">
+            <div class="container">
+                <div class="page-index-header pt-5">
+                    <h2>
+                        PHÒNG PHỔ BIẾN
+                    </h2>
+                    <span>
+                        " Hãy tìm phòng bạn thích, hãy cảm nhận như nhà của bạn "
+                    </span>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    @foreach (var item in ViewBag.Room)
+                    {
+                        <div class="col-md-4 mb-5">
+                            <div class="tab-index-booking i2">
+                                <div class="lable-booking-status">
+                                    @item.Note
+                                </div>
+                                <div class="img-preview">
+                                    <img src="@item.ImageRoom" class="img-fluid" />
+                                </div>
+                                <a href="/Danh-Sach-Phong/@item.Alias" class="title-booking">
+                                    @item.Title
+                                </a>
+                                <div class="description-booking">
+                                    @item.Descriptions
+                                </div>
+                                <div class="option-booking">
+                                    <div class="row m-0">
+                                        @{
+                                            bool skip = true;
+                                            List<string> Addtionals = new List<string>();
+                                            if (!String.IsNullOrEmpty(item.Addtional))
+                                            {
+                                                Addtionals = ((string)item.Addtional).Split(',').ToList();
+                                            }
+                                        }
+                                        <div class="col-md-6">
+                                            @foreach (string s in Addtionals)
+                                            {
+                                                if (skip)
+                                                {
+                                                    skip = false;
+                                                    <p>
+                                                        <i class="fas fa-check-square"></i> @s
+                                                    </p>
+                                                }
+                                                else
+                                                {
+                                                    skip = true;
+                                                }
+                                            }
+                                        </div>
+                                        <div class="col-md-6">
+                                            @{
+                                                skip = false;
+                                            }
+                                            @foreach (string s in Addtionals)
+                                            {
+                                                if (skip)
+                                                {
+                                                    skip = false;
+                                                    <p>
+                                                        <i class="fas fa-check-square"></i> @s
+                                                    </p>
+                                                }
+                                                else
+                                                {
+                                                    skip = true;
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="h20" />
+                                <div class="footer-booking">
+                                    <div class="price-booking float-left">@item.Pirce.ToString("N0") <sup>đ</sup>/<sub>đêm</sub></div>
+                                    <div class="float-right">
+                                        <input type="button" class="btn btn-info" value="Xem chi tiết" />
+                                        <input type="button" class="btn btn-success" value="Đặt phòng" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>

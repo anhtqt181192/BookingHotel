@@ -34,9 +34,27 @@ namespace WebsiteBookingHotel.Controllers
         }
 
         [Route("BLog")]
+        [Route("Bai-Viet")]
+        [Route("Tin-Tuc")]
         public IActionResult Blog()
         {
+            ViewData["WebsiteInfo"] = _context.WebsiteInfo.Find(1);
+            ViewData["Welcome"] = _context.WebsiteInfo.Find(1).Note;
+            ViewBag.Banner = _context.ImageCollection.Where(c => c.Tag == "banner").FirstOrDefault();
+            ViewBag.Room = _context.Room.ToList();
             return View(_context.Blog.ToList());
+        }
+
+        [Route("BLog/{alias}")]
+        [Route("Bai-Viet/{alias}")]
+        [Route("Tin-Tuc/{alias}")]
+        public IActionResult BlogDetails(string alias)
+        {
+            ViewData["WebsiteInfo"] = _context.WebsiteInfo.Find(1);
+            ViewData["Welcome"] = _context.WebsiteInfo.Find(1).Note;
+            ViewBag.Banner = _context.ImageCollection.Where(c => c.Tag == "banner").FirstOrDefault();
+            ViewBag.Room = _context.Room.ToList();
+            return View(_context.Blog.Where(c => c.Alias.ToLower() == alias.ToLower()));
         }
 
         [Route("Lien-He")]

@@ -11,6 +11,7 @@ namespace WebsiteBookingHotel.Data
         public string Title { get; set; }
         public string Descriptions { get; set; }
         public string Addtional { get; set; }
+        public string Alias { get; set; }
         public string HTML { get; set; }
         public string Tag { get; set; }
         public DateTime DateCreate { get; set; }

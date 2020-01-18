@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebsiteBookingHotel.Data.BLog>
+﻿@model WebsiteBookingHotel.Data.BLog
 
 
 @{
@@ -108,31 +108,28 @@
     <div class="container">
         <div class="row m-0 p-0">
             <div class="col-md-8">
-                @foreach (var item in Model)
-                {
-                    <div class="wblog pt-5 border-bottom">
-                        <div class="wblog-date-header">
-                            <a href="/Tin-Tuc/@item.Alias"><h3>@item.Title</h3></a>
-                        </div>
-                        <div class="wblog-image">
-                            <img src="@item.Addtional" class="img-fluid" />
-                        </div>
-                        <div class="wblog-date-content">
-                            @item.Descriptions
-                        </div>
-                        <div class="wblog-date-credit">
-                            <span>
-                                Tác giả : @item.Note
-                            </span>
-                            <span class="float-right">
-                                <i class="far fa-clock"></i> @item.DateCreate.ToString("dd/MM/yyyy")
-                            </span>
-                        </div>
-                        <div class="wblog-date-tag">
-                            @item.Tag
-                        </div>
+                <div class="wblog pt-5 border-bottom">
+                    <div class="wblog-date-header">
+                        <a href="/Tin-Tuc/@Model.Alias"><h3>@Model.Title</h3></a>
                     </div>
-                }
+                    <div class="wblog-image">
+                        <img src="@Model.Addtional" class="img-fluid" />
+                    </div>
+                    <div class="wblog-date-content">
+                        @Model.HTML
+                    </div>
+                    <div class="wblog-date-credit">
+                        <span>
+                            Tác giả : @Model.Note
+                        </span>
+                        <span class="float-right">
+                            <i class="far fa-clock"></i> @Model.DateCreate.ToString("dd/MM/yyyy")
+                        </span>
+                    </div>
+                    <div class="wblog-date-tag">
+                        @Model.Tag
+                    </div>
+                </div>
             </div>
             <div class="col-md-4">
                 <div class="sub-hyperlink mb-5 pb-5 border-bottom">

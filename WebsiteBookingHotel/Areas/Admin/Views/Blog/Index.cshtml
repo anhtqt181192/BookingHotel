@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "Danh sách phòng";
+    ViewData["Title"] = "Danh sách bài viết";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 
 }
@@ -12,7 +12,7 @@
         <div class="kt-subheader   kt-grid__item" id="kt_subheader">
             <div class="kt-subheader__main">
                 <h3 class="kt-subheader__title">
-                    Phòng khách sạn
+                    Bài viết
                 </h3>
                 <span class="kt-subheader__separator kt-subheader__separator--v"></span>
                 <div class="kt-subheader__group" id="kt_subheader_search">
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="kt-subheader__toolbar">
-                <a href="/Admin/Dashboard/CreateRoom" class="btn btn-label-brand btn-bold">
+                <a href="/Admin/Blog/Create" class="btn btn-label-brand btn-bold">
                     Thêm mới
                 </a>
             </div>
@@ -79,7 +79,7 @@
                         type: 'remote',
                         source: {
                             read: {
-                                url: '/Admin/Dashboard/GetListRoom',
+                                url: '/Admin/Blog/GetListBlog',
                             }
                         }
                     },
@@ -103,7 +103,7 @@
                     // columns definition
                     columns: [{
                         field: "title",
-                        title: "Tên phòng",
+                        title: "Tiêu đề bài viết",
                         width: 'auto',
                         autoHide: false
                     }, {
@@ -112,31 +112,28 @@
                         width: 400,
                     }, {
                         field: "addtional",
-                        title: "Dịch vụ đi kèm",
-                        width: 100,
+                        title: "Hình đại diện bài viết",
+                        width: 200,
                         template: function (row) {
-                            var addtional = row.addtional.split(",");
+                            return '<img src="' + row.addtional + '" class="img-fluid" style="max-width: 100px; max-height: 200px" />';
+                        },
+                    }, {
+                        field: "tag",
+                        title: "tag",
+                        template: function (row) {
+                            var s = row.tag.split(",");
                             var html = "";
-                            for (var i = 0; i < addtional.length; i++) {
-                                html += '<p><i class="fas fa-check-square"></i> ' + addtional[i] + '</p>';
+                            for (var i = 0; i < s.length; i++) {
+                                html += "<span class='badge badge-info mr-1 mb-1'>" + s[i] + "</span>";
                             }
                             return html;
                         },
-                    }, {
-                        field: "imageRoom",
-                        title: "Hình ảnh phòng",
+                    },  {
+                        field: "alias",
+                        title: "Link bài viết",
                         template: function (row) {
-                            return '<img src="' + row.imageRoom + '" class="img-fluid" style="max-width: 100px; max-height: 200px" />';
+                            return '<a href="/Bai-Viet/' + row.alias + '" >' + row.title + '</a>';
                         },
-                    }, {
-                        field: "pirce",
-                        title: "Giá",
-                        width: 100,
-                    }, {
-                        field: "note",
-                        title: "Ghi chú",
-                        width: 50,
-
                     }, {
                         field: "id",
                         width: 50,
@@ -146,7 +143,7 @@
                         overflow: 'visible',
                         template: function (row) {
                             return '\
-                        <a href="/Admin/Dashboard/editRoom?id=' + row.id + '" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Chỉnh sửa" >\
+                        <a href="/Admin/Blog/Edit?id=' + row.id + '" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Chỉnh sửa" >\
                             <i class="kt-nav__link-icon flaticon2-contract"></i>\
                         </a>\
                         <a class="btn btn-sm btn-clean btn-icon btn-icon-md removeCompanyButton" title="Xóa"" data-id="' + row.id + '" >\
@@ -205,7 +202,7 @@
                         cancelButtonClass: "btn btn-sm btn-bold btn-brand"
                     }).then(function (result) {
                         if (result.value) {
-                            $.post("/Admin/Dashboard/deleteRoom?id=" + id)
+                            $.post("/Admin/Blog/Remove?id=" + id)
                                 .done(function (data) {
                                     if (data) {
                                         datatable.reload();
