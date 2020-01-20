@@ -3,12 +3,13 @@
     if (ViewData["WebsiteInfo"] != null)
     {
         websiteInfo = (WebsiteBookingHotel.Data.WebsiteInfo)ViewData["WebsiteInfo"];
-        ViewData["Welcome"] = websiteInfo.Note; 
+        ViewData["Welcome"] = websiteInfo.Note;
+        ViewData["websiteName"] = websiteInfo.Name;
     }
     else
     {
         websiteInfo.Logo = "/img/logo.png";
-        ViewData["websiteInfo.Name"] = websiteInfo.Name = "Four Seasons Hotel";
+        ViewData["websiteName"] = websiteInfo.Name = "Four Seasons Hotel";
         websiteInfo.Slogan = "Haravan lựa chọn Website hàng đầu cho khách hàng";
         websiteInfo.AddressWebsite = "56 Vân côi, Q. Tân Bình, Tp.HCM";
         websiteInfo.PhoneNumber = "1900.636.099";
@@ -18,6 +19,7 @@
         ViewData["Welcome"] = "Chào mừng đến với Sunshine Hotel and Resorts";
     }
 }
+
 <!DOCTYPE html>
 <html>
 <head>
