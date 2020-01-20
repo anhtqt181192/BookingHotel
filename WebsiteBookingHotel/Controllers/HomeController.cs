@@ -54,7 +54,7 @@ namespace WebsiteBookingHotel.Controllers
             ViewData["Welcome"] = _context.WebsiteInfo.Find(1).Note;
             ViewBag.Banner = _context.ImageCollection.Where(c => c.Tag == "banner").FirstOrDefault();
             ViewBag.Room = _context.Room.ToList();
-            return View(_context.Blog.Where(c => c.Alias.ToLower() == alias.ToLower()));
+            return View(_context.Blog.Where(c => c.Alias.ToLower() == alias.ToLower()).FirstOrDefault());
         }
 
         [Route("Lien-He")]

@@ -5,11 +5,14 @@
 
 @section Css {
     <style>
-        body {
+    body {
             background: url(@(ViewBag.Banner != null ? ViewBag.Banner.Link : "/img/slideshow_1.jpg")) no-repeat;
             background-size: 100% auto;
 
         }
+    </style>
+    <style>
+
 
         header {
             background: #fff;
@@ -19,7 +22,7 @@
             margin: 0px;
             padding: 25px 0px;
             text-align: center;
-            background: rgba(255,255,255,0.8);
+            background: rgba(245,245,245,0.8);
         }
 
             .page-index-header > h2 {
@@ -43,35 +46,34 @@
 
         h3 {
             font-weight: 500;
-    line-height: 25px;
-    color: #ec6841;
-    font-family: 'Roboto', sans-serif;
+            line-height: 25px;
+            color: #ec6841;
+            font-family: 'Roboto', sans-serif;
         }
 
         .additonal {
-                display: inline-block;
-    width: 100%;
-    position: relative;
+            display: inline-block;
+            width: 100%;
+            position: relative;
         }
 
-        .additonal > p {
-             background: #f2f2f2;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 2px;
-    margin: 15px;
-    width: 40%;
-    float: left;
-    color: #d23d3d;
-        }
+            .additonal > p {
+                background: #f2f2f2;
+                padding: 15px;
+                border: 1px solid #ddd;
+                border-radius: 2px;
+                margin: 15px;
+                width: 40%;
+                float: left;
+                color: #d23d3d;
+            }
 
-        
-        .additonal > p > i {
-           font-size: 16px;
-    color: #22a6ce;
-    padding-right: 5px;
-        }
 
+                .additonal > p > i {
+                    font-size: 16px;
+                    color: #22a6ce;
+                    padding-right: 5px;
+                }
     </style>
 
 }

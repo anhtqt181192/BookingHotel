@@ -43,7 +43,7 @@ namespace WebsiteBookingHotel.Areas.Admin.Controllers
             try
             {
                 models.DateCreate = DateTime.Now;
-                models.Alias = Regex.Replace(nonAccentVietnamese(models.Title), @"[^A-Za-z0-9_\.~]+", "-");
+                models.Alias = Regex.Replace(nonAccentVietnamese(models.Title), @"[^A-Za-z0-9_\.~]+", "-") + "-" + DateTime.Now.ToString("HHmmssddMMyyyy");
                 _context.Blog.Add(models);
                 _context.SaveChanges();
                 return Redirect("/Admin/Blog");
@@ -73,7 +73,7 @@ namespace WebsiteBookingHotel.Areas.Admin.Controllers
             try
             {
                 models.DateCreate = DateTime.Now;
-                models.Alias = Regex.Replace(nonAccentVietnamese(models.Title), @"[^A-Za-z0-9_\.~]+", "-");
+                models.Alias = Regex.Replace(nonAccentVietnamese(models.Title), @"[^A-Za-z0-9_\.~]+", "-") + "-" + models.Id;
                 _context.Blog.Update(models);
                 _context.SaveChanges();
                 return Redirect("/Admin/Blog");

@@ -1,4 +1,144 @@
 ﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+@{
+    ViewData["Title"] = "Liên hệ";
+}
+
+@section Css {
+    <style>
+    body {
+            background: url(@(ViewBag.Banner != null ? ViewBag.Banner.Link : "/img/slideshow_1.jpg")) no-repeat;
+            background-size: 100% auto;
+
+        }
+    </style>
+    <style>
+        header {
+            background: #fff;
+        }
+
+        .page-index-header {
+            margin: 0px;
+            padding: 25px 0px;
+            text-align: center;
+            background: rgba(255,255,255,0.8);
+        }
+
+            .page-index-header > h2 {
+                font-size: 30px;
+                color: #ec6841;
+                letter-spacing: 0px;
+                margin-top: 0;
+                text-transform: uppercase;
+                font-weight: 500;
+                font-family: 'Roboto', sans-serif;
+                text-shadow: 0px 0px 3px #b59472;
+            }
+
+        .background-blur {
+            -webkit-filter: blur(5px);
+            -moz-filter: blur(5px);
+            -o-filter: blur(5px);
+            -ms-filter: blur(5px);
+            filter: blur(5px);
+        }
+
+        h3 {
+            font-weight: 500;
+            line-height: 25px;
+            color: #ec6841;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .wblog-date-header, .sub-hyperlink-header {
+            font-weight: 500;
+            line-height: 25px;
+            color: #ec6841;
+            font-family: 'Roboto', sans-serif;
+            padding: 20px 0px;
+        }
+
+        .wblog-image {
+            padding: 5px;
+            border: 1px solid #4ca2f5;
+            border-radius: 3px;
+        }
+
+        .wblog-date-credit {
+            padding: 10px 0px;
+            border-top: 1px dashed #9a7d00;
+            margin-top: 10px;
+        }
+
+        .wblog-date-tag {
+            padding: 3px 5px;
+            background: #584242;
+            color: #fff;
+            border-radius: 2px;
+        }
+
+        .sub-hyperlink {
+            padding-left: 25px;
+            padding-top: 25px;
+        }
+
+        .sub-hyperlink-content {
+            padding-left: 15px;
+        }
+
+            .sub-hyperlink-content i {
+                color: #45832c;
+            }
+
+            .sub-hyperlink-content a {
+                color: #777;
+            }
+
+        iframe {
+                width: 100%;
+    height: 400px;
+    border: 5px solid #fff;
+    border-radius: 2px;
+    margin-top: 50px;
+        }
+    </style>
+
+}
+
+<div class="container-fluid p-0">
+    <div class="background-blur"></div>
+    <div class="mx-auto page-index-header">
+        <h2>
+            Thông tin liên hệ
+        </h2>
+    </div>
+</div>
+<div class="container-fluid bg-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="wMap">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3753.175983738937!2d105.93103441561777!3d19.832505332908678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31365b373744af9f%3A0xfaac932c1646f030!2sMarissa%20Hotel%20%26%20Spa%20Hai%20Tien!5e0!3m2!1svi!2sus!4v1579411522094!5m2!1svi!2sus"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+            </div>
+            <div class="col-md-4">
+                <div class="sub-hyperlink mb-5 pb-5 border-bottom">
+                    <div class="sub-hyperlink-header">
+                        <h4>Danh mục</h4>
+                    </div>
+                    <div class="sub-hyperlink-content">
+                        <p><a href="/"><i class="fas fa-home"></i> Trang chủ</a></p>
+                        <p><a href="/Danh-Sach-Phong"><i class="fas fa-hotel"></i> Phòng</a></p>
+                        <p><a href="/Tin-Tuc"><i class="fas fa-newspaper"></i> Blog</a></p>
+                        <p><a href="/Gioi-Thieu"><i class="fas fa-info"></i> Giới thiệu</a></p>
+                        <p><a href="/Lien-He"><i class="fas fa-map-marked-alt"></i> Liên hệ</a></p>
+                        <p><a href="/Thu-Vien-Anh"><i class="far fa-images"></i> Thư viện ảnh</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
