@@ -85,6 +85,7 @@ namespace WebsiteBookingHotel.Controllers
                 ViewData["Welcome"] = _context.WebsiteInfo.Find(1).Note;
                 ViewBag.Banner = _context.ImageCollection.Where(c => c.Tag == "banner").FirstOrDefault();
                 ViewBag.Room = _context.Room.ToList();
+                ViewBag.content = _context.Blog.Where(c => c.Note == "details").FirstOrDefault().HTML;
             }
             catch (Exception e)
             {

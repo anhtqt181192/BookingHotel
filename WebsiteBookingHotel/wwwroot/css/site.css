@@ -130,6 +130,10 @@ footer {
         text-transform: uppercase;
     }
 
+.footer-news {
+    display: inline-block;
+}
+
 .footer-news .footer-news-img {
     width: 35%;
     display: block;
