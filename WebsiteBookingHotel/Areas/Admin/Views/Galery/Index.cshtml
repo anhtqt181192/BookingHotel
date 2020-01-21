@@ -1,0 +1,192 @@
+﻿@model IEnumerable<WebsiteBookingHotel.Data.ImageCollection>
+
+@{
+    ViewData["Title"] = "Danh sách bài viết";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+
+@section Css {
+    <style>
+        .img-thumbnail {
+            max-width: 200px;
+            width: 20%;
+            float: left;
+            margin: 5px;
+            position: relative;
+            cursor: pointer;
+        }
+
+            .img-thumbnail:hover {
+                box-shadow: 0px 0px 3px #ccc;
+            }
+
+        .btn-sm-delete {
+            display: block;
+            position: absolute;
+            right: -9px;
+            padding: 1px 5px;
+            border: 1px solid #963232;
+            border-radius: 50%;
+            background: #fff;
+            top: -7px;
+            color: #963232;
+            cursor: pointer;
+        }
+
+            .btn-sm-delete:hover {
+                box-shadow: 0px 0px 3px #963232;
+            }
+    </style>
+}
+
+<div class="kt-content  kt-grid__item kt-grid__item--fluid">
+    <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+
+        <!-- begin:: Content Head -->
+        <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                    Bài viết
+                </h3>
+                <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+            </div>
+        </div>
+
+        <!-- end:: Content Head -->
+        <!-- begin:: Content -->
+        <div class="kt-grid__item kt-grid__item--fluid" id="kt_content">
+
+            <!--begin::Portlet-->
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">
+                            Thư viện hình ảnh
+                        </h3>
+                    </div>
+                </div>
+                <div class="kt-portlet__body">
+                    <div class="row border-bottom pb-5 mb-5">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label">Hình đại diện bài viết</label>
+                                <input type="file" id="file" class="form-control" placeholder="Link hình ảnh" multiple="multiple" />
+                                <span asp-validation-for="Addtional" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Title" class="control-label">Tiêu Đề</label>
+                                <input id="Title" type="text" class="form-control"/>
+                                <span asp-validation-for="Tag" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Tag" class="control-label">Tag</label>
+                                <input id="Tag" type="text" class="form-control" data-role="tagsinput" />
+                                <span asp-validation-for="Tag" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <button type="button" onclick="submitForm();" class="btn btn-primary float-right">Tạo mới</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @foreach (var item in Model)
+                            {
+                                <div class="img-thumbnail">
+                                    <span class="btn-sm-delete" onclick="RemoveImg('@item.Id')">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </span>
+                                    <img class="img-fluid" src="@item.Link"  onclick="openImg('@item.Link')" />
+                                    <p class="text-center">
+                                        @item.Title
+                                    </p>
+                                    <p>
+                                        @if (!String.IsNullOrEmpty(item.Tag))
+                                        {
+                                            foreach (string s in item.Tag.Split(","))
+                                            {
+                                                <span class="badge badge-light mr-1 mb-1">@s</span>
+                                            }
+                                        }
+                                    </p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="kt_modal_1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content note-modal-content-large">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Hình ảnh</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <img id="viewFullImg" class="img-fluid" src="#" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script>
+
+        function openImg(link) {
+            $("#viewFullImg").attr("src", link);
+            $("#kt_modal_1").modal();
+        }
+
+        function submitForm() {
+
+            var input = document.getElementById("file");
+            var files = input.files;
+            var formData = new FormData();
+
+            for (var i = 0; i != files.length; i++) {
+                formData.append("files", files[i]);
+                formData.append("title", $("#Title").val());
+                formData.append("tag", $("#Tag").val());
+            }
+
+            jQuery.ajax({
+                type: 'POST',
+                url: "/Admin/Galery/UploadImgGalleryAsync",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    if (data)
+                        window.location.reload();
+                }
+            });
+        }
+
+        function RemoveImg(Id) {
+            jQuery.ajax({
+                type: 'POST',
+                url: "/Admin/Galery/Delete",
+                data: { Id: Id },
+                success: function (data) {
+                    if (data)
+                        window.location.reload();
+                }
+            });
+        }
+    </script>
+
+}

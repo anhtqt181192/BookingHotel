@@ -161,6 +161,14 @@
             " Hãy tìm phòng bạn thích, hãy cảm nhận như nhà của bạn "
         </span>
     </div>
+    <div class="row">
+        @foreach (var item in ViewBag.thumbnail)
+        {
+            <div class="col-md-3">
+                <img class="img-thumbnail" src="@item.Link" alt="@item.Title" />
+            </div>
+        }
+    </div>
 </div>
 
 <hr />

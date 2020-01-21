@@ -25,6 +25,7 @@ namespace WebsiteBookingHotel.Controllers
                 ViewData["Welcome"] = _context.WebsiteInfo.Find(1).Note;
                 ViewBag.Banner = _context.ImageCollection.Where(c => c.Tag == "banner").FirstOrDefault();
                 ViewBag.Room = _context.Room.ToList();
+                ViewBag.thumbnail = _context.ImageCollection.Where(c => c.Title.ToLower() == "index").ToList();
             }
             catch (Exception e)
             {
@@ -107,7 +108,7 @@ namespace WebsiteBookingHotel.Controllers
             {
 
             }
-            return View();
+            return View(_context.ImageCollection.ToList());
         }
 
         public IActionResult Privacy()
