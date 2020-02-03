@@ -21,5 +21,8 @@ namespace WebsiteBookingHotel.Data
         public DbSet<TypeRoom> TypeRoom { get; set; }
 
         public DbSet<WebsiteInfo> WebsiteInfo { get; set; }
+
+        public DbSet<HTML_content> HTML_content { get; set; }
+        
     }
 }

@@ -91,8 +91,24 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 pt-5">
-                <img src="@Model.ImageRoom" class="img-fluid" />
-                <p class="p-5 border-bottom">
+                <img src="@Model.ImageRoom.Split(",")[0]" class="img-fluid" />
+                <div class="container-thumnail row">
+                    @{ List<string> imgs = new List<string>();
+                        if (!String.IsNullOrEmpty(Model.ImageRoom))
+                        {
+                            imgs = Model.ImageRoom.Split(",").ToList();
+                        }
+
+                        foreach (var src in imgs)
+                        {
+                            <div class="img-thumbnail col-md-3">
+                                <img class="img-fluid" src="@src" />
+                            </div>
+
+                        }
+                    }
+                </div>
+                <p class="border-bottom">
                     <h3>
                         @Model.Title
                     </h3>

@@ -1,0 +1,144 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<WebsiteBookingHotel.Data.HTML_content>
+
+
+@{
+    ViewData["Title"] = "Manager Layout";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+@section Css {
+    <style>
+        .alert.alert-secondary .alert-text {
+            color: #F44336;
+        }
+
+        .alert-icon .kt-font-brand {
+            color: #F44336 !important;
+        }
+
+
+        .container-Logo, .container-Banner {
+            padding: 5px;
+            border: 1px solid #5491e6;
+            margin-bottom: 30px;
+        }
+    </style>
+}
+
+<div class="kt-content  kt-grid__item kt-grid__item--fluid">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3">
+                <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+                    <div class="kt-grid__item kt-grid__item--fluid" id="kt_content">
+
+                        <div class="kt-portlet">
+                            <div class="kt-portlet__head">
+                                <div class="kt-portlet__head-label">
+                                    <h3 class="kt-portlet__head-title">
+                                        @item.TypeName
+                                    </h3>
+                                </div>
+                            </div>
+                            <form class="kt-form" method="post" action="/Admin/ManagerLayout/Edit">
+                                <input name="Id" class="kt-hidden" value="@item.Id" />
+                                <div class="kt-portlet__body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Icon</label>
+                                                <input name="Note" type="text" class="form-control" placeholder="Icon" value="@item.Note">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Tiêu đề</label>
+                                                <input name="TypeName" type="text" class="form-control" placeholder="Tiêu đề" value="@item.TypeName">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Nội Dung</label>
+                                                <textarea name="HTML" type="text" class="form-control" placeholder="Nội Dung" rows="6">@item.HTML</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="kt-portlet__foot">
+                                    <div class="kt-form__actions">
+                                        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                                        <a href="/Admin" class="btn btn-secondary">Hủy</a>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $.post("/Admin/Dashboard/GetLogo", {}, function (data) {
+                $(".container-Logo").html("<img class='img-fluid' style='max-height: 200px;' src=" + data + ">")
+            })
+
+            $.post("/Admin/Dashboard/GetBanner", {}, function (data) {
+                $(".container-Banner").html("<img class='img-fluid' style='max-height: 200px;' src=" + data + ">")
+            })
+
+            $("#fileBanner").change(function (e) {
+                var input = document.getElementById("fileBanner");
+                var files = input.files;
+                var formData = new FormData();
+
+                for (var i = 0; i != files.length; i++) {
+                    formData.append("file", files[i]);
+                }
+
+                jQuery.ajax({
+                    type: 'POST',
+                    url: "/Services/UploadBannerAsync",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        $(".container-Banner").html("<img class='img-fluid' style='max-height: 200px;' src=" + data + ">")
+                    }
+                });
+            })
+
+            $("#fileLogo").change(function (e) {
+                var input = document.getElementById("fileLogo");
+                var files = input.files;
+                var formData = new FormData();
+
+                for (var i = 0; i != files.length; i++) {
+                    formData.append("file", files[i]);
+                }
+
+                jQuery.ajax({
+                    type: 'POST',
+                    url: "/Services/UploadLogoAsync",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        $(".container-Logo").html("<img class='img-fluid' style='max-height: 200px;' src=" + data + ">");
+                        $("#Logo").val(data);
+                    }
+                });
+            })
+        })
+    </script>
+}
+
+
+

@@ -58,7 +58,7 @@ namespace WebsiteBookingHotel.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult GetListBooking()
         {
-            return Json(_context.Booking.ToList());
+            return Json(_context.Booking.Select(c => new BookingModels(c)).OrderByDescending(c => c.Id).ToList());
         }
 
         [HttpPost]

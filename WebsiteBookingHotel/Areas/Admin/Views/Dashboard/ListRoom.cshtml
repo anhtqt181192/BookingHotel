@@ -125,8 +125,14 @@
                     }, {
                         field: "imageRoom",
                         title: "Hình ảnh phòng",
-                        template: function (row) {
-                            return '<img src="' + row.imageRoom + '" class="img-fluid" style="max-width: 100px; max-height: 200px" />';
+                            template: function (row) {
+                                var r = "";
+                                var s = row.imageRoom.split(",");
+                                for (var i = 0; i < s.length; i++) {
+                                    r += '<p><img src="' + s[i] + '" class="img-fluid" style="max-width: 100px; max-height: 200px" /></p>';
+                                }
+
+                                return r;
                         },
                     }, {
                         field: "pirce",

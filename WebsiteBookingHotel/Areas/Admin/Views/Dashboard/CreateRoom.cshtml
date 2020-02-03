@@ -66,7 +66,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="ImageRoom" class="control-label">Link hình ảnh</label>
-                                    <input type="file" id="file" class="form-control" placeholder="Link hình ảnh" />
+                                    <input type="file" id="file" class="form-control" placeholder="Link hình ảnh" multiple="multiple"/>
                                     <input asp-for="ImageRoom" id="ImageRoom" class="form-control kt-hidden" placeholder="Link hình ảnh" />
                                     <span asp-validation-for="ImageRoom" class="text-danger"></span>
                                 </div>
@@ -113,7 +113,7 @@
 
                 jQuery.ajax({
                     type: 'POST',
-                    url: "/Services/UploadImgAsync",
+                    url: "/Services/UploadMutipleImgAsync",
                     data: formData,
                     processData: false,
                     contentType: false,

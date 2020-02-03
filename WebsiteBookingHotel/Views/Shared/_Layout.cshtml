@@ -42,8 +42,8 @@
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link href="~/css/mobile.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css?version=1.12" />
+    <link rel="stylesheet" href="~/css/mobile.css?version=1.12" rel="stylesheet" />
     @RenderSection("Css", required: false)
 </head>
 <body>
@@ -62,7 +62,9 @@
         <div class="logo container">
             <div class="row">
                 <div class="col-12">
-                    <img class="mx-auto d-block" src="@websiteInfo.Logo" style="max-width: 270px; max-height: 80px;">
+                    <a href="/">
+                        <img class="mx-auto d-block" src="@websiteInfo.Logo" style="max-width: 270px; max-height: 80px;">
+                    </a>
                 </div>
             </div>
         </div>
@@ -93,6 +95,18 @@
     </header>
 
     @RenderBody()
+
+
+    <div class="modal" id="modal-booking" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p class="text-center">Đặt phòng thành công.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <footer class="border-top footer">
         <div class="container">
@@ -226,7 +240,7 @@
             };
         })));
         $('[data-toggle="datepicker"]').datepicker({
-          language: 'vn-VN'
+            language: 'vn-VN'
         });
     </script>
     <script src="~/js/site.js" asp-append-version="true"></script>

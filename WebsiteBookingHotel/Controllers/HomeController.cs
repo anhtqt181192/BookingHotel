@@ -26,6 +26,7 @@ namespace WebsiteBookingHotel.Controllers
                 ViewBag.Banner = _context.ImageCollection.Where(c => c.Tag == "banner").FirstOrDefault();
                 ViewBag.Room = _context.Room.ToList();
                 ViewBag.thumbnail = _context.ImageCollection.Where(c => c.Title.ToLower() == "index").ToList();
+                ViewBag.HTML_content = _context.HTML_content.ToList();
             }
             catch (Exception e)
             {
@@ -43,7 +44,7 @@ namespace WebsiteBookingHotel.Controllers
             ViewData["Welcome"] = _context.WebsiteInfo.Find(1).Note;
             ViewBag.Banner = _context.ImageCollection.Where(c => c.Tag == "banner").FirstOrDefault();
             ViewBag.Room = _context.Room.ToList();
-            return View(_context.Blog.ToList());
+            return View(_context.Blog.Where(c => c.Note != "details").ToList());
         }
 
         [Route("BLog/{alias}")]

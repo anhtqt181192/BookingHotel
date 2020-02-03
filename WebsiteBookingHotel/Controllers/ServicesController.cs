@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -38,7 +39,7 @@ namespace WebsiteBookingHotel.Controllers
                 _context.SaveChanges();
                 return Json(true);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return Json(e.Message);
             }
@@ -62,6 +63,35 @@ namespace WebsiteBookingHotel.Controllers
             }
             return Json("/Upload/Img/" + fileName);
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> UploadMutipleImgAsync(IList<IFormFile> file)
+        {
+            string r = "";
+            if (file == null)
+            {
+                return Json(false);
+            }
+            foreach(var item in file)
+            {
+                if (r != "")
+                {
+                    r += ",";
+                }
+                var filePath = Path.Combine(_hostingEnvironment.WebRootPath) + "\\Upload\\Img";
+                var fileName = item.FileName;
+                if (!Directory.Exists(filePath))
+                    Directory.CreateDirectory(filePath);
+                using (FileStream stream = new FileStream(Path.Combine(filePath, fileName), FileMode.Create))
+                {
+                    await item.CopyToAsync(stream);
+                }
+                r += "/Upload/Img/" + fileName;
+            }
+            return Json(r);
+        }
+
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
