@@ -20,6 +20,7 @@ namespace WebsiteBookingHotel.Controllers
         public IActionResult Index()
         {
             ViewData["WebsiteInfo"] = _context.WebsiteInfo.Find(1);
+            ViewData["websiteBLog"] = _context.Blog.Take(2).ToList();
             ViewBag.Banner = _context.ImageCollection.Where(c => c.Tag == "banner").FirstOrDefault();
             ViewBag.Room = _context.Room.ToList();
             return View();
@@ -30,6 +31,7 @@ namespace WebsiteBookingHotel.Controllers
         public IActionResult Room(string alias)
         {
             ViewData["WebsiteInfo"] = _context.WebsiteInfo.Find(1);
+            ViewData["websiteBLog"] = _context.Blog.Take(2).ToList();
             ViewBag.Room = _context.Room.ToList();
             ViewBag.Banner = _context.ImageCollection.Where(c => c.Tag == "banner").FirstOrDefault();
             Room models = _context.Room.Where(c => c.Alias.ToLower() == alias.ToLower()).FirstOrDefault();
