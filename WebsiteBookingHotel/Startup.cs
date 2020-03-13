@@ -14,6 +14,8 @@ using WebsiteBookingHotel.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using static WebsiteBookingHotel.Areas.Identity.Pages.Account.RegisterModel;
+using WebsiteBookingHotel.SignalR;
+using Microsoft.AspNetCore.Routing;
 
 namespace WebsiteBookingHotel
 {
@@ -68,6 +70,8 @@ namespace WebsiteBookingHotel
 
             });
 
+            services.AddSignalR();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -91,6 +95,11 @@ namespace WebsiteBookingHotel
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<DemoHub>("/SignalR");
+            });
 
             app.UseMvc(routes =>
             {
