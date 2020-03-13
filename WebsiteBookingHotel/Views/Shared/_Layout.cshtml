@@ -18,6 +18,11 @@
         websiteInfo.Email = "tuananh181192@gmail.com";
         ViewData["Welcome"] = "Chào mừng đến với The Marissa Hotel";
     }
+    List<WebsiteBookingHotel.Data.BLog> websiteBLog = new List<WebsiteBookingHotel.Data.BLog>();
+    if (ViewData["websiteBLog"] != null)
+    {
+        websiteBLog = (List<WebsiteBookingHotel.Data.BLog>)ViewData["websiteBLog"];
+    }
 }
 
 <!DOCTYPE html>
@@ -51,10 +56,10 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white p-0 mb-5">
             <div class="container">
                 <a class="navbar-brand" href="#">Chào mừng đến với @websiteInfo.Name  !</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-mobile" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div id="navbar-mobile" class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                 </div>
             </div>
@@ -131,22 +136,17 @@
                     <h3 class="footer-header-info">
                         Tin mới nhất
                     </h3>
-                    <div class="footer-news">
-                        <div class="footer-news-img">
-                            <img src="~/img/new-1.jpg" class="img-fluid" />
+                    @foreach (var item in websiteBLog)
+                    {
+                        <div class="footer-news">
+                            <div class="footer-news-img">
+                                <img src="@item.Addtional" class="img-fluid" />
+                            </div>
+                            <div class="footer-news-content">
+                                <a href="/blog/@item.Alias">@item.Title</a>
+                            </div>
                         </div>
-                        <div class="footer-news-content">
-                            <a href="#">Mừng Tết Bính Thân - Miễn phí cho 10 Khách hàng đầu tiên</a>
-                        </div>
-                    </div>
-                    <div class="footer-news">
-                        <div class="footer-news-img">
-                            <img src="~/img/new-1.jpg" class="img-fluid" />
-                        </div>
-                        <div class="footer-news-content">
-                            <a href="#">Mừng Tết Bính Thân - Miễn phí cho 10 Khách hàng đầu tiên</a>
-                        </div>
-                    </div>
+                    }
                 </div>
                 <div class="col-md-3">
                     <h3 class="footer-header-info">

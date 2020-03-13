@@ -95,6 +95,65 @@
             border-radius: 2px;
             margin-top: 50px;
         }
+
+        .container-thumbnail {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .show-img-thumbnail {
+            display: none;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            z-index: 99;
+            width: 100%;
+            height: 100%;
+        }
+
+            .show-img-thumbnail .backdrop {
+                background: #1f1f1f;
+                opacity: 0.8;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+                position: absolute;
+            }
+
+            .show-img-thumbnail .img-container {
+            }
+
+            .show-img-thumbnail .next-span {
+                display: block;
+                position: absolute;
+                background: #808080;
+                color: #fff;
+                right: 0px;
+                top: 45%;
+                padding: 25px;
+                font-size: 20px;
+                transition: all ease-in-out 0.2s;
+                cursor: pointer;
+            }
+
+            .show-img-thumbnail .prev-span {
+                display: block;
+                position: absolute;
+                background: #808080;
+                color: #fff;
+                left: 0px;
+                top: 45%;
+                padding: 25px;
+                font-size: 20px;
+                transition: all ease-in-out 0.2s;
+                cursor: pointer;
+            }
+
+                .show-img-thumbnail .prev-span:hover, .show-img-thumbnail .next-span:hover {
+                    background: #222;
+                }
     </style>
 
 }
@@ -115,14 +174,80 @@
         <div class="row">
             @foreach (var item in Model)
             {
-            <div class=" col-md-4 p-1">
-                <div class="img-thumbnail">
-                    <img class="img-fluid" src="@item.Link" alt="@item.Title" />
+                <div class=" col-md-4 p-1" onclick="ImgThumbnailClick(this);">
+                    <div class="img-thumbnail">
+                        <div class="container-thumbnail">
+                            <img class="img-fluid" src="@item.Link" alt="@item.Title" />
+                        </div>
+                    </div>
                 </div>
-            </div>
-                
             }
         </div>
-        
+
     </div>
 </div>
+<div class="show-img-thumbnail">
+    <div class="backdrop" onclick="closeImgThumbnail()">
+    </div>
+    <img id="thumbnail-img-show" src="" alt="" class="img-preview" style="max-width: 90%; max-height: 90%;" />
+    <span class="next-span" onclick="nextImgThumbnail()">
+        <i class="fas fa-chevron-right"></i>
+    </span>
+    <span class="prev-span" onclick="prevImgThumbnail()">
+        <i class="fas fa-chevron-left"></i>
+    </span>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+       
+        var curent = $(".container-thumbnail")[0];
+
+        function ImgThumbnailClick(target) {
+            curent = $(target);
+            showImgThumbnail();
+        }
+        
+        function nextImgThumbnail() {
+            var target = $(curent).next();
+            if (target.length > 0) {
+                curent = target;
+                console.log(curent);
+                showImgThumbnail()
+            }
+        }
+
+        function prevImgThumbnail() {
+            var target = $(curent).prev();
+            if (target.length > 0) {
+                curent = target;
+                console.log(curent);
+                showImgThumbnail()
+            }
+        }
+
+        function showImgThumbnail() {
+            var src = $(curent).find("img").attr("src")
+            $("body").css("overflow", "hidden");
+            $(".show-img-thumbnail").fadeIn(200, function () {
+                $("#thumbnail-img-show").attr("src", src);
+                resizeThumbnail();
+                $(".show-img-thumbnail").css("display", "flex");
+            });
+        }
+
+        function closeImgThumbnail() {
+            $(".show-img-thumbnail").fadeOut(200);
+            $("body").css("overflow", "auto");
+        }
+
+         $(window).resize(function () {
+             resizeThumbnail();
+        })
+
+        function resizeThumbnail() {
+            $("#thumbnail-img-show").css("marginTop", ($(window).innerHeight() - $("#thumbnail-img-show").innerHeight()) / 2);
+            $("#thumbnail-img-show").css("marginLeft", ($(window).innerWidth() - $("#thumbnail-img-show").innerWidth()) / 2);
+        }
+    </script>
+}

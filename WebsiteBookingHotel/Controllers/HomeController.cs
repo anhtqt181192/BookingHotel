@@ -23,6 +23,7 @@ namespace WebsiteBookingHotel.Controllers
             {
                 ViewData["WebsiteInfo"] = _context.WebsiteInfo.Find(1);
                 ViewData["Welcome"] = _context.WebsiteInfo.Find(1).Note;
+                ViewData["websiteBLog"] = _context.Blog.Take(2).ToList(); 
                 ViewBag.Banner = _context.ImageCollection.Where(c => c.Tag == "banner").FirstOrDefault();
                 ViewBag.Room = _context.Room.ToList();
                 ViewBag.thumbnail = _context.ImageCollection.Where(c => c.Title.ToLower() == "index").ToList();
@@ -42,6 +43,7 @@ namespace WebsiteBookingHotel.Controllers
         {
             ViewData["WebsiteInfo"] = _context.WebsiteInfo.Find(1);
             ViewData["Welcome"] = _context.WebsiteInfo.Find(1).Note;
+            ViewData["websiteBLog"] = _context.Blog.Take(2).ToList();
             ViewBag.Banner = _context.ImageCollection.Where(c => c.Tag == "banner").FirstOrDefault();
             ViewBag.Room = _context.Room.ToList();
             return View(_context.Blog.Where(c => c.Note != "details").ToList());
@@ -54,6 +56,7 @@ namespace WebsiteBookingHotel.Controllers
         {
             ViewData["WebsiteInfo"] = _context.WebsiteInfo.Find(1);
             ViewData["Welcome"] = _context.WebsiteInfo.Find(1).Note;
+            ViewData["websiteBLog"] = _context.Blog.Take(2).ToList();
             ViewBag.Banner = _context.ImageCollection.Where(c => c.Tag == "banner").FirstOrDefault();
             ViewBag.Room = _context.Room.ToList();
             return View(_context.Blog.Where(c => c.Alias.ToLower() == alias.ToLower()).FirstOrDefault());
@@ -66,6 +69,7 @@ namespace WebsiteBookingHotel.Controllers
             {
                 ViewData["WebsiteInfo"] = _context.WebsiteInfo.Find(1);
                 ViewData["Welcome"] = _context.WebsiteInfo.Find(1).Note;
+                ViewData["websiteBLog"] = _context.Blog.Take(2).ToList();
                 ViewBag.Banner = _context.ImageCollection.Where(c => c.Tag == "banner").FirstOrDefault();
                 ViewBag.Room = _context.Room.ToList();
             }
@@ -83,6 +87,7 @@ namespace WebsiteBookingHotel.Controllers
             {
                 ViewData["WebsiteInfo"] = _context.WebsiteInfo.Find(1);
                 ViewData["websiteName"] = _context.WebsiteInfo.Find(1).Name;
+                ViewData["websiteBLog"] = _context.Blog.Take(2).ToList();
                 ViewData["Welcome"] = _context.WebsiteInfo.Find(1).Note;
                 ViewBag.Banner = _context.ImageCollection.Where(c => c.Tag == "banner").FirstOrDefault();
                 ViewBag.Room = _context.Room.ToList();
@@ -103,6 +108,7 @@ namespace WebsiteBookingHotel.Controllers
                 ViewData["WebsiteInfo"] = _context.WebsiteInfo.Find(1);
                 ViewData["websiteName"] = _context.WebsiteInfo.Find(1).Name;
                 ViewData["Welcome"] = _context.WebsiteInfo.Find(1).Note;
+                ViewData["websiteBLog"] = _context.Blog.Take(2).ToList();
                 ViewBag.Banner = _context.ImageCollection.Where(c => c.Tag == "banner").FirstOrDefault();
                 ViewBag.Room = _context.Room.ToList();
             }
